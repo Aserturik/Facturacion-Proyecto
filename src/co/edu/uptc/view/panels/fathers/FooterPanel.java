@@ -1,11 +1,66 @@
 package co.edu.uptc.view.panels.fathers;
 
+import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.buttons.GrayButton;
+
 import javax.swing.*;
 
 public class FooterPanel extends JPanel {
+    private GrayButton homeButton,clientsButton,productsButton,billButton;
+    private EventsView eventsView;
     public FooterPanel(){
         super();
-        this.setPreferredSize(new java.awt.Dimension(1133, 451));
-        this.setBackground(new java.awt.Color(0, 000, 0));
+        this.setMinimumSize(new java.awt.Dimension(1133, 169));
+        this.setMaximumSize(new java.awt.Dimension(1133, 169));
+        this.setPreferredSize(new java.awt.Dimension(1133, 169));
+        this.setBackground(new java.awt.Color(255, 255, 255));
+        initComponents();
+        listeners();
+    }
+
+    public void initComponents(){
+        this.homeButton = new GrayButton("Principal");
+        this.clientsButton = new GrayButton("Personas");
+        this.productsButton = new GrayButton("Productos");
+        this.billButton = new GrayButton("Factura");
+        homeButton.setBig();
+        clientsButton.setBig();
+        productsButton.setBig();
+        billButton.setBig();
+        this.add(this.homeButton);
+        this.add(this.clientsButton);
+        this.add(this.productsButton);
+        this.add(this.billButton);
+    }
+
+    public void listeners(){
+        homeButton();
+        clientsButton();
+        productsButton();
+        billButton();
+    }
+
+    public void homeButton(){
+        this.homeButton.addActionListener(evt -> eventsView.openHome());
+    }
+
+    public void clientsButton(){
+        this.clientsButton.addActionListener(evt -> eventsView.openClients());
+    }
+
+    public void productsButton(){
+        this.productsButton.addActionListener(evt -> eventsView.openProducts());
+    }
+
+    public void billButton(){
+        this.billButton.addActionListener(evt -> eventsView.openBill());
+    }
+
+    public EventsView getEventsView() {
+        return eventsView;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 }
