@@ -67,6 +67,7 @@ public class PrincipalPanel extends JPanel {
     private void panelClients(){
         upGbc();
         this.add(panelClients, gbc);
+        panelClients.setVisible(false);
     }
 
     public void openClients(){
@@ -79,6 +80,7 @@ public class PrincipalPanel extends JPanel {
     private void panelProducts(){
         upGbc();
         this.add(panelProducts, gbc);
+        panelProducts.setVisible(false);
     }
 
     public void openProducts(){
@@ -91,6 +93,7 @@ public class PrincipalPanel extends JPanel {
     private void panelBill(){
         upGbc();
         this.add(panelBill, gbc);
+        panelBill.setVisible(false);
     }
 
     public void openBill(){

@@ -15,6 +15,7 @@ public class BodyHome extends BodyPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         initComponents(gbc);
+        listeners();
     }
 
     @Override
@@ -42,6 +43,20 @@ public class BodyHome extends BodyPanel {
     public void footerBar(Graphics2D gg){
         gg.setColor(new Color(217, 217, 217));
         gg.fillRect(60,368,1013,42);
+    }
+
+    private void listeners(){
+        buttonHome.addActionListener(e -> eventsView.openHome());
+        buttonPerson.addActionListener(e -> eventsView.openClients());
+        buttonShop.addActionListener(e -> eventsView.openProducts());
+    }
+
+    public EventsView getEventsView() {
+        return eventsView;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 
 }

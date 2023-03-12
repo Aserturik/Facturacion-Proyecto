@@ -11,7 +11,6 @@ public class BodyPanel extends JPanel {
         this.setMinimumSize(new java.awt.Dimension(1133, 451));
         this.setMaximumSize(new java.awt.Dimension(1133, 451));
         this.setPreferredSize(new java.awt.Dimension(1133, 451));
-        //this.setBackground(new java.awt.Color(255, 255, 255));
     }
 
     public EventsView getEventsView() {

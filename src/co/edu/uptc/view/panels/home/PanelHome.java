@@ -3,21 +3,22 @@ import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelHome extends DefaultPanel {
     private BodyHome bodyPanelHome;
+    private HeaderHome headerPanelHome;
     public PanelHome() {
         super();
+        headerPanelHome = new HeaderHome();
+        bodyPanelHome = new BodyHome();
         header();
         body();
-        paintComponents(getGraphics());
     }
 
     public void header(){
-        super.getHeaderPanel().setBackground(new java.awt.Color(255, 255, 255));
-        super.getHeaderPanel().setTitle("BIENVENIDO");
+        this.setHeaderPanel(headerPanelHome);
+        this.add(this.getHeaderPanel(), java.awt.BorderLayout.NORTH);
     }
 
     public void body() {
-        bodyPanelHome = new BodyHome();
         this.setBodyPanel(bodyPanelHome);
-        this.add(this.getBodyPanel());
+        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
     }
 }

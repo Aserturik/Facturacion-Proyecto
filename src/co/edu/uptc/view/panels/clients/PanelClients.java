@@ -3,6 +3,7 @@ package co.edu.uptc.view.panels.clients;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelClients extends DefaultPanel {
+    private HeaderClients headerClients;
     private BodyClients bodyClients;
     public PanelClients(){
         super();
@@ -11,17 +12,15 @@ public class PanelClients extends DefaultPanel {
     }
 
     private void header(){
-        super.getHeaderPanel().setBackground(new java.awt.Color(255, 255, 255));
-        super.getHeaderPanel().setTitle("CLIENTES");
+        headerClients = new HeaderClients();
+        this.setHeaderPanel(headerClients);
+        this.add(this.getHeaderPanel(), java.awt.BorderLayout.NORTH);
     }
 
     public void body(){
         bodyClients = new BodyClients();
         this.setBodyPanel(bodyClients);
-        this.add(this.getBodyPanel());
-    }
-
-    private void footer(){
-       // this.getFooterPanel().setEventsView(super.getEventsView());
+        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+        bodyClients.inabiliteFields();
     }
 }
