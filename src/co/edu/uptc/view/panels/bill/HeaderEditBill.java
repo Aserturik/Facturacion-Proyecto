@@ -4,9 +4,9 @@ import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
 import java.awt.*;
 
-public class HeaderBill extends HeaderPanel {
-    private String title = "FACTURAS";
-    public HeaderBill() {
+public class HeaderEditBill extends HeaderPanel {
+    private String title = "Editar Factura";
+    public HeaderEditBill() {
         super();
         this.setBackground(new java.awt.Color(255, 255, 255));
     }
@@ -24,6 +24,6 @@ public class HeaderBill extends HeaderPanel {
         gg.setColor(new Color(0, 0, 0, 60));
         gg.setFont(new Font("Cabin", Font.BOLD, 32));
         gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        gg.drawString(title, 428, 114);
+        gg.drawString(title, 413, 114);
     }
 }

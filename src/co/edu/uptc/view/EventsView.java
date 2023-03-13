@@ -5,4 +5,5 @@ public interface EventsView {
     void openClients();
     void openProducts();
     void openBill();
+    void openEditBill();
 }

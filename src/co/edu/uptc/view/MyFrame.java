@@ -72,7 +72,11 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     @Override
     public void openBill() {
-        System.out.println("openBill");
         principalPanel.openBill();
+    }
+
+    @Override
+    public void openEditBill() {
+        principalPanel.openEditBill();
     }
 }

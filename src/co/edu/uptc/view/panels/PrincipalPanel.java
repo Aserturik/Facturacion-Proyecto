@@ -2,6 +2,7 @@ package co.edu.uptc.view.panels;
 
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.bill.PanelBill;
+import co.edu.uptc.view.panels.bill.PanelEditBill;
 import co.edu.uptc.view.panels.clients.PanelClients;
 import co.edu.uptc.view.panels.fathers.FooterPanel;
 import co.edu.uptc.view.panels.home.PanelHome;
@@ -18,7 +19,7 @@ public class PrincipalPanel extends JPanel {
     private PanelClients panelClients;
     private PanelProducts panelProducts;
     private PanelBill panelBill;
-
+    private PanelEditBill panelEditBill;
 
     public PrincipalPanel() {
         this.setSize(1133,744);
@@ -32,11 +33,13 @@ public class PrincipalPanel extends JPanel {
         panelClients = new PanelClients();
         panelProducts = new PanelProducts();
         panelBill = new PanelBill();
+        panelEditBill = new PanelEditBill();
         footerPanel = new FooterPanel();
         panelHome();
         panelClients();
         panelProducts();
         panelBill();
+        panelEditBill();
         footerPanel();
     }
 
@@ -62,6 +65,7 @@ public class PrincipalPanel extends JPanel {
         panelClients.setVisible(false);
         panelProducts.setVisible(false);
         panelBill.setVisible(false);
+        panelEditBill.setVisible(false);
     }
 
     private void panelClients(){
@@ -75,6 +79,7 @@ public class PrincipalPanel extends JPanel {
         panelClients.setVisible(true);
         panelProducts.setVisible(false);
         panelBill.setVisible(false);
+        panelEditBill.setVisible(false);
     }
 
     private void panelProducts(){
@@ -87,6 +92,7 @@ public class PrincipalPanel extends JPanel {
         panelHome.setVisible(false);
         panelClients.setVisible(false);
         panelProducts.setVisible(true);
+        panelEditBill.setVisible(false);
         panelBill.setVisible(false);
     }
 
@@ -100,7 +106,22 @@ public class PrincipalPanel extends JPanel {
         panelHome.setVisible(false);
         panelClients.setVisible(false);
         panelProducts.setVisible(false);
+        panelEditBill.setVisible(false);
         panelBill.setVisible(true);
+    }
+
+    private void panelEditBill(){
+        upGbc();
+        this.add(panelEditBill, gbc);
+        panelEditBill.setVisible(false);
+    }
+
+    public void openEditBill(){
+        panelHome.setVisible(false);
+        panelClients.setVisible(false);
+        panelProducts.setVisible(false);
+        panelBill.setVisible(false);
+        panelEditBill.setVisible(true);
     }
 
     private void footerPanel() {
