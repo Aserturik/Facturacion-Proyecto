@@ -21,7 +21,8 @@ public class PrincipalPanel extends JPanel {
     private PanelBill panelBill;
     private PanelEditBill panelEditBill;
 
-    public PrincipalPanel() {
+    public PrincipalPanel(EventsView eventsView) {
+        this.eventsView = eventsView;
         this.setSize(1133,744);
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
@@ -29,12 +30,12 @@ public class PrincipalPanel extends JPanel {
     }
 
     private void initComponents(){
-        panelHome = new PanelHome();
-        panelClients = new PanelClients();
-        panelProducts = new PanelProducts();
-        panelBill = new PanelBill();
-        panelEditBill = new PanelEditBill();
-        footerPanel = new FooterPanel();
+        panelHome = new PanelHome(eventsView);
+        panelClients = new PanelClients(eventsView);
+        panelProducts = new PanelProducts(eventsView);
+        panelBill = new PanelBill(eventsView);
+        panelEditBill = new PanelEditBill(eventsView);
+        footerPanel = new FooterPanel(eventsView);
         panelHome();
         panelClients();
         panelProducts();
@@ -124,19 +125,18 @@ public class PrincipalPanel extends JPanel {
         panelEditBill.setVisible(true);
     }
 
+    public void openEditBill(int index){
+        panelHome.setVisible(false);
+        panelClients.setVisible(false);
+        panelProducts.setVisible(false);
+        panelBill.setVisible(false);
+        panelEditBill.setVisible(true);
+    }
+
     private void footerPanel() {
         gbc.gridy = 1;
         this.add(footerPanel, gbc);
     }
-
-    public EventsView getEventsView() {
-        return eventsView;
-    }
-
-    public void setEventsView(EventsView eventsView) {
-        this.eventsView = eventsView;
-    }
-
     public GridBagConstraints getGbc() {
         return gbc;
     }

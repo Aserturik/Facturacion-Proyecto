@@ -1,13 +1,15 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
 import java.awt.*;
 
 public class HeaderBill extends HeaderPanel {
     private String title = "FACTURAS";
-    public HeaderBill() {
+    public HeaderBill(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
     }
 

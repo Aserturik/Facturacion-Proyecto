@@ -1,12 +1,14 @@
 package co.edu.uptc.view.panels.clients;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelClients extends DefaultPanel {
     private HeaderClients headerClients;
     private BodyClients bodyClients;
-    public PanelClients(){
+    public PanelClients(EventsView eventsView){
         super();
+        this.setEventsView(eventsView);
         header();
         body();
     }

@@ -9,8 +9,9 @@ import java.awt.*;
 public class BodyHome extends BodyPanel {
     private ButtonImage buttonHome, buttonPerson, buttonShop;
     private EventsView eventsView;
-    public BodyHome(){
+    public BodyHome(EventsView eventsView){
         super();
+        this.eventsView = eventsView;
         this.setBackground(new java.awt.Color(255,255, 255));
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

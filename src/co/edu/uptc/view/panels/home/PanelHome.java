@@ -1,13 +1,15 @@
 package co.edu.uptc.view.panels.home;
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelHome extends DefaultPanel {
     private BodyHome bodyPanelHome;
     private HeaderHome headerPanelHome;
-    public PanelHome() {
+    public PanelHome(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         headerPanelHome = new HeaderHome();
-        bodyPanelHome = new BodyHome();
+        bodyPanelHome = new BodyHome(eventsView);
         header();
         body();
     }
@@ -20,5 +22,7 @@ public class PanelHome extends DefaultPanel {
     public void body() {
         this.setBodyPanel(bodyPanelHome);
         this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+        bodyPanelHome.setEventsView(this.getEventsView());
+        System.out.println("PanelHome.body getEventsView: " + this.getEventsView());
     }
 }

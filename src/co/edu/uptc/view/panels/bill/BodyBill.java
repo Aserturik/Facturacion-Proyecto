@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.bill.subpanels.PreviewBill;
 import co.edu.uptc.view.panels.bill.subpanels.ShowAllBills;
 import co.edu.uptc.view.panels.fathers.BodyPanel;
@@ -11,8 +12,11 @@ public class BodyBill extends BodyPanel {
     private PreviewBill previewBill;
     private ShowAllBills showAllBills;
     private GridBagConstraints gbc;
-    public BodyBill() {
+    public BodyBill(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
+        showAllBills = new ShowAllBills(eventsView);
+        previewBill = new PreviewBill(eventsView);
         this.setBackground(new Color(255, 255, 255));
         gbc = new GridBagConstraints();
         panelUp();
@@ -38,7 +42,6 @@ public class BodyBill extends BodyPanel {
     }
 
     private void showAllBills() {
-        showAllBills = new ShowAllBills();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -49,7 +52,6 @@ public class BodyBill extends BodyPanel {
         this.add(showAllBills, gbc);
     }
     private void previewBill() {
-        previewBill = new PreviewBill();
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;

@@ -1,15 +1,18 @@
 package co.edu.uptc.view.panels.bill;
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelBill extends DefaultPanel {
     private HeaderBill headerBill;
     private BodyBill bodyBill;
-    public PanelBill() {
+    public PanelBill(EventsView eventsView) {
         super();
-        headerBill = new HeaderBill();
-        bodyBill = new BodyBill();
+        this.setEventsView(eventsView);
+        headerBill = new HeaderBill(eventsView);
+        bodyBill = new BodyBill(eventsView);
         header();
         body();
+        listeners();
     }
 
     private void header() {
@@ -20,5 +23,9 @@ public class PanelBill extends DefaultPanel {
     public void body() {
         this.setBodyPanel(bodyBill);
         this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+    }
+
+    public void listeners() {
+        this.bodyBill.setEventsView(this.bodyBill.getEventsView());
     }
 }

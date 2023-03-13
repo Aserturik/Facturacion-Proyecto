@@ -1,12 +1,14 @@
 package co.edu.uptc.view.panels.products;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelProducts extends DefaultPanel {
     private HeaderProducts headerProducts;
     private BodyProducts bodyProducts;
-    public PanelProducts(){
+    public PanelProducts(EventsView eventsView){
         super();
+        this.setEventsView(eventsView);
         header();
         body();
     }

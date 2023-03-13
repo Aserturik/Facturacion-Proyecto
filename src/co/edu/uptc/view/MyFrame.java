@@ -18,7 +18,6 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
-        setEventsView();
     }
 
     private void initComponents() {
@@ -26,7 +25,7 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     }
 
     private void principalPanel() {
-        principalPanel = new PrincipalPanel();
+        principalPanel = new PrincipalPanel(this);
         this.add(principalPanel);
     }
 
@@ -45,12 +44,6 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
 
     // Eventos de los paneles
-
-    private void setEventsView(){
-        principalPanel.setEventsView(this);
-        principalPanel.getFooterPanel().setEventsView(this);
-        principalPanel.getPanelHome().getBodyPanel().setEventsView(this);
-    }
     @Override
     public void openHome() {
         System.out.println("openHome");
@@ -76,7 +69,23 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     }
 
     @Override
+    public void openEditBill(int index) {
+        System.out.println("openEditBill");
+        principalPanel.openEditBill(index);
+    }
+
+    @Override
     public void openEditBill() {
+        System.out.println("openEditBill");
         principalPanel.openEditBill();
+    }
+    @Override
+    public void openAddBill() {
+        principalPanel.openEditBill();
+    }
+
+    @Override
+    public void searchBill() {
+        //principalPanel.get
     }
 }

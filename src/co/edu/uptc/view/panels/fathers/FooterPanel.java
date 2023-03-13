@@ -8,8 +8,9 @@ import javax.swing.*;
 public class FooterPanel extends JPanel {
     private GrayButton homeButton,clientsButton,productsButton,billButton;
     private EventsView eventsView;
-    public FooterPanel(){
+    public FooterPanel(EventsView eventsView){
         super();
+        this.eventsView = eventsView;
         this.setMinimumSize(new java.awt.Dimension(1133, 169));
         this.setMaximumSize(new java.awt.Dimension(1133, 169));
         this.setPreferredSize(new java.awt.Dimension(1133, 169));

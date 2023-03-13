@@ -1,12 +1,14 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
 public class PanelEditBill extends DefaultPanel {
     private BodyEditBill bodyPanelEditBill;
     private HeaderEditBill headerPanelEditBill;
-    public PanelEditBill() {
+    public PanelEditBill(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         headerPanelEditBill = new HeaderEditBill();
         bodyPanelEditBill = new BodyEditBill();
         header();

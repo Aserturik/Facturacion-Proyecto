@@ -48,6 +48,11 @@ public class TextFieldGray extends JTextField {
         this.setMinimumSize(new Dimension(312,35));
     }
 
+    public void setSmall(){
+        this.setFont(new java.awt.Font("Cabin", 0, 14));
+        placeholder.setFont(new java.awt.Font("Cabin", 0, 14));
+    }
+
     public void getValue(){
         this.value = this.getText();
     }
