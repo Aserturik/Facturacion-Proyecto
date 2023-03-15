@@ -16,7 +16,7 @@ public class ShowAllBills extends JPanel {
     private GrayButton searchButton,addButton;
     private TextFieldGray searchTextField;
     private JTable table;
-    private List<String> BillList;
+    private List<String> listBill;
     private GridBagConstraints gbc;
     private EventsView eventsView;
     public ShowAllBills(EventsView eventsView) {
@@ -32,16 +32,16 @@ public class ShowAllBills extends JPanel {
         initComponents();
     }
 
-    public void initComponents(){
+    private void initComponents(){
         table = new JTable(0,1);
-        tableModelFeatures();
-        billList();
+        tableModelTemplate();
+        listBill();
         addTable();
         addSearch();
         listeners();
     }
 
-    private void tableModelFeatures() {
+    private void tableModelTemplate() {
         table.setEnabled(false);
         table.setBackground(new Color(217, 217, 217));
         table.setFont(new Font("Cabin", Font.PLAIN, 20));
@@ -63,16 +63,16 @@ public class ShowAllBills extends JPanel {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
-    public void billList(){
-        BillList = new ArrayList<>();
+    public void listBill(){
+        listBill = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
 
         for (int i = 0; i < 10; i++) {
-            BillList.add("Factura " + i);
+            listBill.add("Factura " + i);
         }
 
-        for (int i = 0; i < BillList.size(); i++) {
-            model.addRow(new Object[]{BillList.get(i)});
+        for (int i = 0; i < listBill.size(); i++) {
+            model.addRow(new Object[]{listBill.get(i)});
         }
 
         table.setModel(model);
