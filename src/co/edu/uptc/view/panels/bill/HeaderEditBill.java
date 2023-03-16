@@ -30,6 +30,31 @@ public class HeaderEditBill extends HeaderPanel {
         gbc.gridheight = gridheight;
     }
 
+    private JLabel getFormatLabel(JLabel label,int whidth, int heigth){
+        label.setSize(whidth,heigth);
+        label.setPreferredSize(new Dimension(whidth,heigth));
+        label.setMinimumSize(new Dimension(whidth,heigth));
+        label.setMaximumSize(new Dimension(whidth,heigth));
+        label.setOpaque(true);
+        label.setFont(new java.awt.Font("Cabin", 1, 24));
+        label.setBackground(new java.awt.Color(217, 217, 217));
+        label.setForeground(new java.awt.Color(0, 0, 0, 60));
+        return label;
+    }
+
+    private JLabel getFormatTextLabel(JLabel label,int whidth, int heigth){
+        label.setSize(whidth,heigth);
+        label.setPreferredSize(new Dimension(whidth,heigth));
+        label.setMinimumSize(new Dimension(whidth,heigth));
+        label.setMaximumSize(new Dimension(whidth,heigth));
+        label.setOpaque(true);
+        numberBillText.setFont(new java.awt.Font("Cabin", 1, 24));
+        numberBillText.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        numberBillText.setBackground(new java.awt.Color(255, 255, 255));
+        numberBillText.setForeground(new java.awt.Color(0, 0, 0, 60));
+        return label;
+    }
+
     private void initComponents(){
         numberBill();
         numberBillText();
@@ -42,37 +67,26 @@ public class HeaderEditBill extends HeaderPanel {
 
     private void numberBill() {
         numberBill = new JLabel("N* Factura:", SwingConstants.CENTER);
-        numberBill.setSize(191,42);
-        numberBill.setOpaque(true);
-        numberBill.setFont(new java.awt.Font("Cabin", 1, 24));
-        numberBill.setBackground(new java.awt.Color(217, 217, 217));
-        numberBill.setForeground(new java.awt.Color(0, 0, 0, 60));
+        numberBill = getFormatLabel(numberBill,191 ,42);
         generalGbc(0, 0, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(54, 40, 0, 0);
         this.add(numberBill, gbc);
     }
 
     private void numberBillText() {
         numberBillText = new JLabel("Numero", SwingConstants.CENTER);
-        numberBillText.setSize(166,42);
-        numberBillText.setFont(new java.awt.Font("Cabin", 1, 24));
-        numberBillText.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        numberBillText.setBackground(new java.awt.Color(255, 255, 255));
-        numberBillText.setForeground(new java.awt.Color(0, 0, 0, 60));
+        numberBillText = getFormatTextLabel(numberBillText,166,42);
         generalGbc(1, 0, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(54, 0, 0, 40);
         this.add(numberBillText, gbc);
     }
 
     private void clientName() {
         clientName = new JLabel("Cliente:", SwingConstants.LEFT);
-        clientName.setSize(191,42);
-        clientName.setOpaque(true);
-        clientName.setFont(new java.awt.Font("Cabin", 1, 24));
-        clientName.setBackground(new java.awt.Color(217, 217, 217));
-        clientName.setForeground(new java.awt.Color(0, 0, 0, 60));
+        clientName = getFormatLabel(clientName,191,42);
         generalGbc(2, 0, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(54, 0, 0, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(clientName, gbc);
     }
 
@@ -80,42 +94,36 @@ public class HeaderEditBill extends HeaderPanel {
         buttonSelectClient = new GrayButton("Seleccionar");
         buttonSelectClient.setFont(new java.awt.Font("Cabin", 1, 24));
         generalGbc(3, 0, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(54, 0, 0, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(buttonSelectClient, gbc);
     }
 
     private void date() {
         date = new JLabel("dd/mm/aaaa", SwingConstants.CENTER);
-        date.setSize(232,42);
-        date.setOpaque(true);
-        date.setFont(new java.awt.Font("Cabin", 1, 24));
-        date.setBackground(new java.awt.Color(217, 217, 217));
-        date.setForeground(new java.awt.Color(0, 0, 0, 60));
+        date = getFormatLabel(date,232,42);
         generalGbc(4, 0, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(54, 22, 0, 0);
         this.add(date, gbc);
     }
 
     private void clientNameActual() {
         clientNameActual = new JLabel("Cliente Actual:", SwingConstants.LEFT);
-        clientNameActual.setSize(191,42);
-        clientNameActual.setOpaque(true);
-        clientNameActual.setFont(new java.awt.Font("Cabin", 1, 24));
-        clientNameActual.setBackground(new java.awt.Color(217, 217, 217));
-        clientNameActual.setForeground(new java.awt.Color(0, 0, 0, 60));
+        clientNameActual = getFormatLabel(clientNameActual,154,28);
+        clientNameActual.setFont(new java.awt.Font("Cabin", 1, 20));
         generalGbc(2, 1, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(7, 0, 0, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(clientNameActual, gbc);
     }
 
     private void clientNameActualText() {
         clientNameActualText = new JLabel("Cliente Actual", SwingConstants.LEFT);
-        clientNameActualText.setFont(new java.awt.Font("Cabin", 1, 24));
-        clientNameActualText.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        clientNameActualText.setBackground(new java.awt.Color(255, 255, 255));
-        clientNameActualText.setForeground(new java.awt.Color(0, 0, 0, 60));
+        clientNameActualText = getFormatTextLabel(clientNameActualText,204,28);
+        clientNameActualText.setFont(new java.awt.Font("Cabin", 1, 20));
         generalGbc(3, 1, 1, 1);
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(7, 0, 0, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(clientNameActualText, gbc);
     }
 }
