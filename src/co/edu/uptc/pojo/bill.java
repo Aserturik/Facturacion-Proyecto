@@ -1,4 +1,4 @@
-package co.edu.uptc.model;
+package co.edu.uptc.pojo;
 
 import java.util.List;
 

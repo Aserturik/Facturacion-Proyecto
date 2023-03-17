@@ -1,5 +1,7 @@
 package co.edu.uptc.view.panels.clients;
 
+import co.edu.uptc.pojo.Person;
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.ButtonImage;
 import co.edu.uptc.view.panels.fathers.BodyPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
@@ -13,12 +15,16 @@ public class BodyClients extends BodyPanel {
     private ButtonImage buttonClients, buttonAdd, buttonEdit, buttonDelete, buttonCheck;
     private JComboBox comboBoxDocumentType;
     private TextFieldGray textFieldDocument, textFieldName, textFieldLastName, textFieldAddress,CityAdress;
-    public BodyClients() {
+    private EventsView eventsView;
+    private Person selectedClient;
+    public BodyClients(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setLayout(new GridBagLayout());
         this.gbc = new GridBagConstraints();
         initComponents();
+        inabiliteFields();
     }
 
     public void generalGbc(int x, int y,int height,int insets){
@@ -102,6 +108,12 @@ public class BodyClients extends BodyPanel {
         generalGbc(2,0,3,15);
         gbc.insets = new Insets(80,50,15,15);
         this.add(this.buttonAdd, gbc);
+
+        buttonAdd.addActionListener(e -> {
+            setEdit(true);
+            habilitateFields();
+            eventsView.ocultHeaderClients();
+        });
     }
 
     public void buttonEdit(){
@@ -113,6 +125,7 @@ public class BodyClients extends BodyPanel {
         buttonEdit.addActionListener(e -> {
             setEdit(true);
             habilitateFields();
+            eventsView.ocultHeaderClients();
         });
     }
 
@@ -121,6 +134,19 @@ public class BodyClients extends BodyPanel {
         generalGbc(2,3,3,15);
         gbc.insets = new Insets(15,50,80,15);
         this.add(this.buttonDelete, gbc);
+
+        buttonDelete.addActionListener(e -> {
+            optionPaneDelete();
+        });
+    }
+
+    private void optionPaneDelete() {
+        int option = JOptionPane.showConfirmDialog(null, "Desea eliminar al cliente?", "Eliminar", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            // eliminar al cliente
+        }else {
+            JOptionPane.showMessageDialog(null, "Cliente no eliminado");
+        }
     }
 
     public void buttonCheck(){
@@ -132,6 +158,8 @@ public class BodyClients extends BodyPanel {
         buttonCheck.addActionListener(e -> {
             setEdit(false);
             inabiliteFields();
+            eventsView.showNormalHeaderClients();
+            eventsView.enableFooterButtons();
         });
     }
 
@@ -151,7 +179,9 @@ public class BodyClients extends BodyPanel {
     }
 
     public void habilitateFields(){
-        this.comboBoxDocumentType.setEditable(true);
+        this.comboBoxDocumentType.setEditable(false);
+        this.comboBoxDocumentType.setEditable(false);
+        comboBoxDocumentType.setEnabled(true);
         this.textFieldDocument.setEditable(true);
         this.textFieldName.setEditable(true);
         this.textFieldLastName.setEditable(true);
@@ -161,10 +191,24 @@ public class BodyClients extends BodyPanel {
 
     public void inabiliteFields(){
         this.comboBoxDocumentType.setEditable(false);
+        comboBoxDocumentType.setEnabled(false);
         this.textFieldDocument.setEditable(false);
         this.textFieldName.setEditable(false);
         this.textFieldLastName.setEditable(false);
         this.textFieldAddress.setEditable(false);
         this.CityAdress.setEditable(false);
+    }
+
+    public void modeSelected(){
+        inabiliteFields();
+        setEdit(true);
+    }
+
+    public Person getSelectedClient(){
+        return selectedClient;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 }

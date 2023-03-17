@@ -6,23 +6,30 @@ import co.edu.uptc.view.panels.fathers.DefaultPanel;
 public class PanelProducts extends DefaultPanel {
     private HeaderProducts headerProducts;
     private BodyProducts bodyProducts;
+    private EventsView eventsView;
     public PanelProducts(EventsView eventsView){
         super();
         this.setEventsView(eventsView);
+        headerProducts = new HeaderProducts(eventsView);
+        bodyProducts = new BodyProducts(eventsView);
         header();
         body();
     }
 
     private void header(){
-        headerProducts = new HeaderProducts();
-        this.setHeaderPanel(headerProducts);
-        this.add(this.getHeaderPanel(), java.awt.BorderLayout.NORTH);
+        this.add(headerProducts, java.awt.BorderLayout.NORTH);
     }
 
     public void body(){
-        bodyProducts = new BodyProducts();
-        this.setBodyPanel(bodyProducts);
-        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+        this.add(bodyProducts, java.awt.BorderLayout.CENTER);
         bodyProducts.inabiliteFields();
+    }
+
+    public void ocultHeader(){
+        headerProducts.ocultSearch();
+    }
+
+    public void showNormalHeader(){
+        headerProducts.showNormal();
     }
 }

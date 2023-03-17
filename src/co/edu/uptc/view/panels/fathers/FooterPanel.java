@@ -58,6 +58,20 @@ public class FooterPanel extends JPanel {
         this.billButton.addActionListener(evt -> eventsView.openEditBill());
     }
 
+    public void disableButtons(){
+        this.homeButton.setEnabled(false);
+        this.clientsButton.setEnabled(false);
+        this.productsButton.setEnabled(false);
+        this.billButton.setEnabled(false);
+    }
+
+    public void enableButtons(){
+        this.homeButton.setEnabled(true);
+        this.clientsButton.setEnabled(true);
+        this.productsButton.setEnabled(true);
+        this.billButton.setEnabled(true);
+    }
+
     public EventsView getEventsView() {
         return eventsView;
     }

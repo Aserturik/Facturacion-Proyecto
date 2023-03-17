@@ -9,8 +9,8 @@ public class PanelEditBill extends DefaultPanel {
     public PanelEditBill(EventsView eventsView) {
         super();
         this.setEventsView(eventsView);
-        headerPanelEditBill = new HeaderEditBill();
-        bodyPanelEditBill = new BodyEditBill();
+        headerPanelEditBill = new HeaderEditBill(eventsView);
+        bodyPanelEditBill = new BodyEditBill(eventsView);
         header();
         body();
     }

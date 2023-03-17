@@ -1,5 +1,6 @@
 package co.edu.uptc.view;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.presenter.Contract;
 import co.edu.uptc.view.panels.PrincipalPanel;
 
@@ -87,5 +88,54 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     @Override
     public void searchBill() {
         //principalPanel.get
+    }
+
+    @Override
+    public void saveBillAndExit() {
+        System.out.println("saveBillAndExit");
+        principalPanel.openBill();
+    }
+
+    @Override
+    public void ocultHeaderClients() {
+        System.out.println("ocultHeaderClients");
+        principalPanel.getPanelClients().ocultHeader();
+    }
+
+    @Override
+    public void ocultHeaderProducts() {
+        System.out.println("ocultHeaderProducts");
+        principalPanel.getPanelProducts().ocultHeader();
+    }
+
+    @Override
+    public void showNormalHeaderClients(){
+        System.out.println("showNormalHeaderClients()");
+        principalPanel.getPanelClients().showNormalHeader();
+    }
+
+    @Override
+    public void comboBoxClients(){
+        System.out.println("comboBoxClients()");
+        //principalPanel.getPanelClients().comboBoxClients();
+    }
+
+    @Override
+    public void showNormalHeaderProducts(){
+        System.out.println("showNormalHeaderProducts()");
+        principalPanel.getPanelProducts().showNormalHeader();
+    }
+
+    @Override
+    public void selectClient(){
+        System.out.println("selectClient()");
+        principalPanel.disableFooterButtons();
+        Person selectClient = principalPanel.getPanelClients().getSelectedClient();
+    }
+
+    @Override
+    public void enableFooterButtons(){
+        System.out.println("enableFooterButtons()");
+        principalPanel.enableFooterButtons();
     }
 }

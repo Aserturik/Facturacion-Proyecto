@@ -1,21 +1,27 @@
 package co.edu.uptc.view.panels.clients;
 
 import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class HeaderClients extends HeaderPanel {
     private TextFieldGray searchTextField;
     private GrayButton searchButton;
+    private JLabel grayLabel;
     private JComboBox<String> clientsComboBox;
-    private UptcList<String> clientsList;
+    private List<String> clientsList;
+    private EventsView eventsView;
     private GridBagConstraints gbc;
-    public HeaderClients() {
+
+    public HeaderClients(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setLayout(new GridBagLayout());
         this.setBackground(new java.awt.Color(255, 255, 255));
         initComponents();
@@ -23,6 +29,7 @@ public class HeaderClients extends HeaderPanel {
 
     private void initComponents(){
         this.gbc = new GridBagConstraints();
+        grayLabel = new JLabel();
         clientsComboBox();
         searchTextField();
         searchButton();
@@ -47,6 +54,13 @@ public class HeaderClients extends HeaderPanel {
         generalGbc();
         gbc.insets = new Insets(82,60,15,0);
         this.add(this.clientsComboBox, gbc);
+        listenerComboBox();
+    }
+
+    public void listenerComboBox(){
+        this.clientsComboBox.addActionListener(e -> {
+            eventsView.comboBoxClients();
+        });
     }
 
     public void searchTextField(){
@@ -67,5 +81,35 @@ public class HeaderClients extends HeaderPanel {
         gbc.gridx = 2;
         gbc.insets = new Insets(82,0,15,80);
         this.add(this.searchButton, gbc);
+    }
+
+    public void ocultSearch(){
+        this.clientsComboBox.setVisible(false);
+        this.searchTextField.setVisible(false);
+        this.searchButton.setVisible(false);
+        grayLabel.setSize(1013,42);
+        grayLabel.setBackground(new java.awt.Color(217, 217, 217));
+        grayLabel.setOpaque(true);
+
+        generalGbc();
+        gbc.gridx = 1;
+        gbc.insets = new Insets(82,60,15,60);
+        this.add(this.grayLabel, gbc);
+        grayLabel.setVisible(true);
+    }
+
+    public void showNormal(){
+        this.clientsComboBox.setVisible(true);
+        this.searchTextField.setVisible(true);
+        this.searchButton.setVisible(true);
+        this.grayLabel.setVisible(false);
+    }
+
+    public void setClientsList(List<String> clientsList) {
+        this.clientsList = clientsList;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 }

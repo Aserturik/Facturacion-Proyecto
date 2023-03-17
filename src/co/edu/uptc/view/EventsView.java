@@ -9,4 +9,12 @@ public interface EventsView {
     void openEditBill();
     void openAddBill();
     void searchBill();
+    void saveBillAndExit();
+    void ocultHeaderClients();
+    void ocultHeaderProducts();
+    void showNormalHeaderClients();
+    void showNormalHeaderProducts();
+    void comboBoxClients();
+    void selectClient();
+    void enableFooterButtons();
 }

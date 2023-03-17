@@ -137,6 +137,15 @@ public class PrincipalPanel extends JPanel {
         gbc.gridy = 1;
         this.add(footerPanel, gbc);
     }
+
+    public void disableFooterButtons(){
+        footerPanel.disableButtons();
+    }
+
+    public void enableFooterButtons(){
+        footerPanel.enableButtons();
+    }
+
     public GridBagConstraints getGbc() {
         return gbc;
     }
@@ -183,5 +192,21 @@ public class PrincipalPanel extends JPanel {
 
     public void setPanelBill(PanelBill panelBill) {
         this.panelBill = panelBill;
+    }
+
+    public EventsView getEventsView() {
+        return eventsView;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
+    }
+
+    public PanelEditBill getPanelEditBill() {
+        return panelEditBill;
+    }
+
+    public void setPanelEditBill(PanelEditBill panelEditBill) {
+        this.panelEditBill = panelEditBill;
     }
 }

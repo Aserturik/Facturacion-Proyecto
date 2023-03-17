@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
@@ -14,13 +15,16 @@ public class HeaderEditBill extends HeaderPanel {
     private GrayButton buttonSelectClient;
     private JLabel clientNameActual;
     private JLabel clientNameActualText;
+    private EventsView eventsView;
     private GridBagConstraints gbc;
-    public HeaderEditBill() {
+    public HeaderEditBill(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setLayout(new java.awt.GridBagLayout());
         gbc = new GridBagConstraints();
         initComponents();
+        listeners();
     }
 
     private void generalGbc(int gridx, int gridy, int gridwidth, int gridheight) {
@@ -84,6 +88,7 @@ public class HeaderEditBill extends HeaderPanel {
     private void clientName() {
         clientName = new JLabel("Cliente:", SwingConstants.LEFT);
         clientName = getFormatLabel(clientName,191,42);
+        clientName.setHorizontalAlignment(SwingConstants.CENTER);
         generalGbc(2, 0, 1, 1);
         gbc.insets = new Insets(54, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -103,7 +108,7 @@ public class HeaderEditBill extends HeaderPanel {
         date = new JLabel("dd/mm/aaaa", SwingConstants.CENTER);
         date = getFormatLabel(date,232,42);
         generalGbc(4, 0, 1, 1);
-        gbc.insets = new Insets(54, 22, 0, 0);
+        gbc.insets = new Insets(54, 22, 0, 50);
         this.add(date, gbc);
     }
 
@@ -111,9 +116,9 @@ public class HeaderEditBill extends HeaderPanel {
         clientNameActual = new JLabel("Cliente Actual:", SwingConstants.LEFT);
         clientNameActual = getFormatLabel(clientNameActual,154,28);
         clientNameActual.setFont(new java.awt.Font("Cabin", 1, 20));
+        clientNameActual.setHorizontalAlignment(SwingConstants.CENTER);
         generalGbc(2, 1, 1, 1);
-        gbc.insets = new Insets(7, 0, 0, 0);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(7, 0, 10, 0);
         this.add(clientNameActual, gbc);
     }
 
@@ -121,9 +126,24 @@ public class HeaderEditBill extends HeaderPanel {
         clientNameActualText = new JLabel("Cliente Actual", SwingConstants.LEFT);
         clientNameActualText = getFormatTextLabel(clientNameActualText,204,28);
         clientNameActualText.setFont(new java.awt.Font("Cabin", 1, 20));
+        clientNameActualText.setHorizontalAlignment(SwingConstants.CENTER);
         generalGbc(3, 1, 1, 1);
-        gbc.insets = new Insets(7, 0, 0, 0);
+        gbc.insets = new Insets(7, 0, 10, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         this.add(clientNameActualText, gbc);
+    }
+
+    private void listeners(){
+        buttonSelectClient.addActionListener(e -> {
+            eventsView.selectClient();
+        });
+    }
+
+    public EventsView getEventsView() {
+        return eventsView;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 }

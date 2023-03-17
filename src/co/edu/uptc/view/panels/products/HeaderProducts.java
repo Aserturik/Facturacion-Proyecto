@@ -1,6 +1,7 @@
 package co.edu.uptc.view.panels.products;
 
 import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
@@ -14,9 +15,12 @@ public class HeaderProducts extends HeaderPanel {
     private JComboBox<String> productsComboBox;
     private UptcList<String> productsList;
     private GridBagConstraints gbc;
+    private JLabel grayLabel;
+    private EventsView eventsView;
 
-    public HeaderProducts() {
+    public HeaderProducts(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setLayout(new GridBagLayout());
         this.setBackground(new java.awt.Color(255, 255, 255));
         initComponents();
@@ -24,6 +28,7 @@ public class HeaderProducts extends HeaderPanel {
 
     private void initComponents(){
         this.gbc = new GridBagConstraints();
+        grayLabel = new JLabel();
         productsComboBox();
         searchTextField();
         searchButton();
@@ -68,5 +73,67 @@ public class HeaderProducts extends HeaderPanel {
         gbc.gridx = 2;
         gbc.insets = new Insets(82,0,15,80);
         this.add(this.searchButton, gbc);
+    }
+
+    public void ocultSearch(){
+        this.searchTextField.setVisible(false);
+        this.searchButton.setVisible(false);
+        this.productsComboBox.setVisible(false);
+        grayLabel.setSize(1013,42);
+        grayLabel.setBackground(new java.awt.Color(217, 217, 217));
+        grayLabel.setOpaque(true);
+
+        generalGbc();
+        gbc.gridx = 1;
+        gbc.insets = new Insets(82,60,15,60);
+        this.add(this.grayLabel, gbc);
+        grayLabel.setVisible(true);
+    }
+
+    public void showNormal(){
+        this.searchTextField.setVisible(true);
+        this.searchButton.setVisible(true);
+        this.productsComboBox.setVisible(true);
+        grayLabel.setVisible(false);
+    }
+
+    public TextFieldGray getSearchTextField() {
+        return searchTextField;
+    }
+
+    public void setSearchTextField(TextFieldGray searchTextField) {
+        this.searchTextField = searchTextField;
+    }
+
+    public GrayButton getSearchButton() {
+        return searchButton;
+    }
+
+    public void setSearchButton(GrayButton searchButton) {
+        this.searchButton = searchButton;
+    }
+
+    public JComboBox<String> getProductsComboBox() {
+        return productsComboBox;
+    }
+
+    public void setProductsComboBox(JComboBox<String> productsComboBox) {
+        this.productsComboBox = productsComboBox;
+    }
+
+    public UptcList<String> getProductsList() {
+        return productsList;
+    }
+
+    public void setProductsList(UptcList<String> productsList) {
+        this.productsList = productsList;
+    }
+
+    public EventsView getEventsView() {
+        return eventsView;
+    }
+
+    public void setEventsView(EventsView eventsView) {
+        this.eventsView = eventsView;
     }
 }

@@ -1,9 +1,11 @@
 package co.edu.uptc.view.panels.products;
 
+import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.ButtonImage;
 import co.edu.uptc.view.panels.fathers.BodyPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class BodyProducts extends BodyPanel {
@@ -11,9 +13,11 @@ public class BodyProducts extends BodyPanel {
     private boolean isEdit;
     private ButtonImage buttonProducts, buttonAdd, buttonEdit, buttonDelete, buttonCheck;
     private TextFieldGray textFieldCIU, textFieldBarCode,textFieldPrice,textFieldDescription;
+    private EventsView eventsView;
 
-    public BodyProducts() {
+    public BodyProducts(EventsView eventsView) {
         super();
+        this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setLayout(new GridBagLayout());
         this.gbc = new GridBagConstraints();
@@ -84,6 +88,12 @@ public class BodyProducts extends BodyPanel {
         generalGbc(2,0,3,15);
         gbc.insets = new Insets(80,50,15,15);
         this.add(this.buttonAdd, gbc);
+
+        buttonAdd.addActionListener(e -> {
+            setEdit(true);
+            habilitateFields();
+            eventsView.ocultHeaderProducts();
+        });
     }
 
     public void buttonEdit(){
@@ -95,6 +105,7 @@ public class BodyProducts extends BodyPanel {
         buttonEdit.addActionListener(e -> {
             setEdit(true);
             habilitateFields();
+            eventsView.ocultHeaderProducts();
         });
     }
 
@@ -103,6 +114,17 @@ public class BodyProducts extends BodyPanel {
         generalGbc(2,3,3,15);
         gbc.insets = new Insets(15,50,80,15);
         this.add(this.buttonDelete, gbc);
+
+        buttonDelete.addActionListener(e -> {
+            optionPaneDelete();
+        });
+    }
+
+    private void optionPaneDelete() {
+        int option = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            // Eliminar producto
+        }
     }
 
     public void buttonCheck(){
@@ -114,6 +136,7 @@ public class BodyProducts extends BodyPanel {
         buttonCheck.addActionListener(e -> {
             setEdit(false);
             inabiliteFields();
+            eventsView.showNormalHeaderProducts();
         });
     }
 
@@ -144,5 +167,9 @@ public class BodyProducts extends BodyPanel {
         this.textFieldBarCode.setEditable(false);
         this.textFieldPrice.setEditable(false);
         this.textFieldDescription.setEditable(false);
+    }
+
+    public void setEventsView(EventsView eventsView){
+        this.eventsView = eventsView;
     }
 }
