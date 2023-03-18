@@ -1,9 +1,11 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
 import java.awt.*;
+import java.util.List;
 
 public class HeaderBill extends HeaderPanel {
     private String title = "FACTURAS";
@@ -28,4 +30,5 @@ public class HeaderBill extends HeaderPanel {
         gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         gg.drawString(title, 428, 114);
     }
+
 }

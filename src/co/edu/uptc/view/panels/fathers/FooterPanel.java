@@ -8,6 +8,7 @@ import javax.swing.*;
 public class FooterPanel extends JPanel {
     private GrayButton homeButton,clientsButton,productsButton,billButton;
     private EventsView eventsView;
+    private boolean isEnableButtons;
     public FooterPanel(EventsView eventsView){
         super();
         this.eventsView = eventsView;
@@ -17,6 +18,7 @@ public class FooterPanel extends JPanel {
         this.setBackground(new java.awt.Color(255, 255, 255));
         initComponents();
         listeners();
+        isEnableButtons = true;
     }
 
     public void initComponents(){
@@ -63,6 +65,7 @@ public class FooterPanel extends JPanel {
         this.clientsButton.setEnabled(false);
         this.productsButton.setEnabled(false);
         this.billButton.setEnabled(false);
+        isEnableButtons = false;
     }
 
     public void enableButtons(){
@@ -70,6 +73,7 @@ public class FooterPanel extends JPanel {
         this.clientsButton.setEnabled(true);
         this.productsButton.setEnabled(true);
         this.billButton.setEnabled(true);
+        isEnableButtons = true;
     }
 
     public EventsView getEventsView() {
@@ -78,5 +82,13 @@ public class FooterPanel extends JPanel {
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
+    }
+
+    public boolean isEnableButtons() {
+        return isEnableButtons;
+    }
+
+    public void setEnableButtons(boolean isEnableButtons) {
+        this.isEnableButtons = isEnableButtons;
     }
 }

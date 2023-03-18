@@ -1,6 +1,9 @@
 package co.edu.uptc.view.panels.bill;
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
+
+import java.util.List;
 
 public class PanelBill extends DefaultPanel {
     private HeaderBill headerBill;

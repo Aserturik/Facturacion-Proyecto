@@ -1,6 +1,7 @@
 package co.edu.uptc.view.panels.clients;
 
 import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
@@ -8,6 +9,7 @@ import co.edu.uptc.view.textfield.TextFieldGray;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeaderClients extends HeaderPanel {
@@ -15,21 +17,24 @@ public class HeaderClients extends HeaderPanel {
     private GrayButton searchButton;
     private JLabel grayLabel;
     private JComboBox<String> clientsComboBox;
-    private List<String> clientsList;
+    private List<Person> clientsList;
     private EventsView eventsView;
     private GridBagConstraints gbc;
+    private PanelClients panelClients;
 
-    public HeaderClients(EventsView eventsView) {
+    public HeaderClients(EventsView eventsView, PanelClients panelClients) {
         super();
         this.setEventsView(eventsView);
         this.setLayout(new GridBagLayout());
         this.setBackground(new java.awt.Color(255, 255, 255));
+        this.panelClients = panelClients;
         initComponents();
     }
 
     private void initComponents(){
         this.gbc = new GridBagConstraints();
         grayLabel = new JLabel();
+        clientsList = panelClients.getPrincipalPanel().getFrame().getClients();
         clientsComboBox();
         searchTextField();
         searchButton();
@@ -54,17 +59,18 @@ public class HeaderClients extends HeaderPanel {
         generalGbc();
         gbc.insets = new Insets(82,60,15,0);
         this.add(this.clientsComboBox, gbc);
+        setListClients(clientsList);
         listenerComboBox();
     }
 
     public void listenerComboBox(){
-        this.clientsComboBox.addActionListener(e -> {
-            eventsView.comboBoxClients();
+        clientsComboBox.addActionListener(e -> {
+            panelClients.getBodyClients().showClientData(getSelectedClient(clientsComboBox.getSelectedIndex()));
         });
     }
 
     public void searchTextField(){
-        this.searchTextField = new TextFieldGray("Documento del cliente");
+        this.searchTextField = new TextFieldGray("Cliente");
         this.searchTextField.setSize(272,42);
         this.searchTextField.setBounds(10, 10, 200, 30);
         generalGbc();
@@ -105,11 +111,34 @@ public class HeaderClients extends HeaderPanel {
         this.grayLabel.setVisible(false);
     }
 
-    public void setClientsList(List<String> clientsList) {
+    public void setClientsList(List<Person> clientsList) {
         this.clientsList = clientsList;
     }
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
     }
+
+    public void setListClients(List<Person> clients) {
+        this.clientsComboBox.removeAllItems();
+        for (Person client : clients) {
+            this.clientsComboBox.addItem((client.getName() + " " + client.getLastName()));
+        }
+    }
+
+    private Person getSelectedClient(int index){
+        if (index == -1){
+            return clientsList.get(0);
+        }
+        return clientsList.get(index);
+    }
+
+    public void setPanelClients(PanelClients panelClients) {
+        this.panelClients = panelClients;
+    }
+
+    public PanelClients getPanelClients() {
+        return panelClients;
+    }
+
 }

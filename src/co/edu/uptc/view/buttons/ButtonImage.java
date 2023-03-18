@@ -41,7 +41,6 @@ public class ButtonImage extends JButton {
     }
 
     public void opacity(float opacity){
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
         if(opacity == 1){
             this.setEnabled(true);
         }else {

@@ -1,6 +1,8 @@
 package co.edu.uptc.view.panels;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.MyFrame;
 import co.edu.uptc.view.panels.bill.PanelBill;
 import co.edu.uptc.view.panels.bill.PanelEditBill;
 import co.edu.uptc.view.panels.clients.PanelClients;
@@ -10,6 +12,7 @@ import co.edu.uptc.view.panels.products.PanelProducts;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class PrincipalPanel extends JPanel {
     private EventsView eventsView;
@@ -20,9 +23,12 @@ public class PrincipalPanel extends JPanel {
     private PanelProducts panelProducts;
     private PanelBill panelBill;
     private PanelEditBill panelEditBill;
+    private List<Person> listClients;
+    private MyFrame frame;
 
-    public PrincipalPanel(EventsView eventsView) {
+    public PrincipalPanel(EventsView eventsView, MyFrame frame) {
         this.eventsView = eventsView;
+        this.frame = frame;
         this.setSize(1133,744);
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
@@ -31,7 +37,8 @@ public class PrincipalPanel extends JPanel {
 
     private void initComponents(){
         panelHome = new PanelHome(eventsView);
-        panelClients = new PanelClients(eventsView);
+        panelClients = new PanelClients(eventsView,this);
+        panelClients.setPrincipalPanel(this);
         panelProducts = new PanelProducts(eventsView);
         panelBill = new PanelBill(eventsView);
         panelEditBill = new PanelEditBill(eventsView);
@@ -146,6 +153,10 @@ public class PrincipalPanel extends JPanel {
         footerPanel.enableButtons();
     }
 
+    // Eventos del Presenter
+
+    // Getters and Setters
+
     public GridBagConstraints getGbc() {
         return gbc;
     }
@@ -208,5 +219,12 @@ public class PrincipalPanel extends JPanel {
 
     public void setPanelEditBill(PanelEditBill panelEditBill) {
         this.panelEditBill = panelEditBill;
+    }
+    public void setFrame(MyFrame frame) {
+        this.frame = frame;
+    }
+
+    public MyFrame getFrame() {
+        return frame;
     }
 }

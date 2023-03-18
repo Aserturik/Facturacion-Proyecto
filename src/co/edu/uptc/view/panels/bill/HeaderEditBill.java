@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
@@ -15,6 +16,7 @@ public class HeaderEditBill extends HeaderPanel {
     private GrayButton buttonSelectClient;
     private JLabel clientNameActual;
     private JLabel clientNameActualText;
+    private Person actualClient;
     private EventsView eventsView;
     private GridBagConstraints gbc;
     public HeaderEditBill(EventsView eventsView) {
@@ -141,6 +143,11 @@ public class HeaderEditBill extends HeaderPanel {
 
     public EventsView getEventsView() {
         return eventsView;
+    }
+
+    public void setActualClient(Person actualClient) {
+        this.actualClient = actualClient;
+        clientNameActualText.setText(actualClient.getName());
     }
 
     public void setEventsView(EventsView eventsView) {

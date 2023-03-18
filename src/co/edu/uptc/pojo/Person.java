@@ -1,14 +1,18 @@
 package co.edu.uptc.pojo;
 
 public class Person {
-    private int id;
+    boolean isAdult;
+    private static int id;
+    private int document;
     private String name;
     private String lastName;
     private String address;
     private String city;
 
-    public Person(int id, String name, String lastName, String address, String city) {
-        this.id = id;
+    public Person(boolean isAdult,int document, String name, String lastName, String address, String city) {
+        this.isAdult = isAdult;
+        this.id++;
+        this.document = document;
         this.name = name;
         this.lastName = lastName;
         this.address = address;
@@ -57,8 +61,42 @@ public class Person {
         this.city = city;
     }
 
+    public boolean isAdult() {
+        return isAdult;
+    }
+
+    public void setAdult(boolean adult) {
+        isAdult = adult;
+    }
+
+    public String getDocument() {
+        return document+"";
+    }
+
+    public void setDocument(int document) {
+        this.document = document;
+    }
+
+    public Person clone(Person originalPerson){
+        this.id = originalPerson.id;
+        this.document = originalPerson.document;
+        this.name = originalPerson.name;
+        this.lastName = originalPerson.lastName;
+        this.address = originalPerson.address;
+        this.city = originalPerson.city;
+        return this;
+    }
+
     @Override
     public String toString() {
-        return "Person{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", address=" + address + ", city=" + city + '}';
+        return "Person{" +
+                "id=" + id +
+                "isAdult=" + isAdult +
+                ", document=" + document +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.fathers.DefaultPanel;
 
@@ -23,5 +24,9 @@ public class PanelEditBill extends DefaultPanel {
     public void body() {
         this.setBodyPanel(bodyPanelEditBill);
         this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+    }
+
+    public void setActualClient(Person person){
+        headerPanelEditBill.setActualClient(person);
     }
 }

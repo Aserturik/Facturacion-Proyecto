@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.bill.subpanels.PreviewBill;
 import co.edu.uptc.view.panels.bill.subpanels.ShowAllBills;
@@ -7,11 +8,13 @@ import co.edu.uptc.view.panels.fathers.BodyPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class BodyBill extends BodyPanel {
     private PreviewBill previewBill;
     private ShowAllBills showAllBills;
     private GridBagConstraints gbc;
+    private List<Person> listClients;
     public BodyBill(EventsView eventsView) {
         super();
         this.setEventsView(eventsView);

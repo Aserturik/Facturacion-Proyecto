@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.panels.bill.subpanels.DescriptionEditPanel;
 import co.edu.uptc.view.panels.bill.subpanels.TableEditPanel;

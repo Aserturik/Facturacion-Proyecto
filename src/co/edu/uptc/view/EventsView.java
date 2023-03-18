@@ -1,5 +1,7 @@
 package co.edu.uptc.view;
 
+import co.edu.uptc.pojo.Person;
+
 public interface EventsView {
     void openHome();
     void openClients();
@@ -17,4 +19,6 @@ public interface EventsView {
     void comboBoxClients();
     void selectClient();
     void enableFooterButtons();
+    void openSelectedPerson();
+    void showClientData(Person person);
 }

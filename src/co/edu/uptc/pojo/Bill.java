@@ -2,13 +2,13 @@ package co.edu.uptc.pojo;
 
 import java.util.List;
 
-public class bill {
+public class Bill {
     private Person client;
     private List<Product> products;
     private double total;
     private static final int IVA = 19;
 
-    public bill(Person client, List<Product> products, double total) {
+    public Bill(Person client, List<Product> products, double total) {
         this.client = client;
         this.products = products;
         this.total = total;

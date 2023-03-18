@@ -137,6 +137,7 @@ public class BodyProducts extends BodyPanel {
             setEdit(false);
             inabiliteFields();
             eventsView.showNormalHeaderProducts();
+            eventsView.openSelectedPerson();
         });
     }
 

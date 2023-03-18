@@ -14,6 +14,13 @@ public class GeneralProject {
         presenter.setView(view);
         presenter.setModel(model);
         model.setPresenter(presenter);
+        conectModelAndView();
+    }
+
+    private void conectModelAndView(){
+        presenter.loadClients();
+        presenter.loadProducts();
+        presenter.loadBills();
     }
 
     private void createMVP(){

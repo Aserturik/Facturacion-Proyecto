@@ -8,6 +8,7 @@ import co.edu.uptc.view.textfield.TextFieldGray;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class BodyClients extends BodyPanel {
     private boolean isEdit;
@@ -17,7 +18,10 @@ public class BodyClients extends BodyPanel {
     private TextFieldGray textFieldDocument, textFieldName, textFieldLastName, textFieldAddress,CityAdress;
     private EventsView eventsView;
     private Person selectedClient;
-    public BodyClients(EventsView eventsView) {
+    private List<Person> clients;
+    private PanelClients panelClients;
+
+    public BodyClients(EventsView eventsView, PanelClients panelClients) {
         super();
         this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
@@ -25,6 +29,8 @@ public class BodyClients extends BodyPanel {
         this.gbc = new GridBagConstraints();
         initComponents();
         inabiliteFields();
+        this.panelClients = panelClients;
+        clients = panelClients.getPrincipalPanel().getFrame().getClients();
     }
 
     public void generalGbc(int x, int y,int height,int insets){
@@ -62,7 +68,7 @@ public class BodyClients extends BodyPanel {
 
     public void comboBoxDocumentType(){
         this.comboBoxDocumentType = new JComboBox();
-        this.comboBoxDocumentType.setModel(new DefaultComboBoxModel(new String[] { "Seleccione un tipo de documento", "Cédula de ciudadanía", "Cédula de extranjería", "Tarjeta de identidad", "Pasaporte" }));
+        this.comboBoxDocumentType.setModel(new DefaultComboBoxModel(new String[] { "Cédula de ciudadanía", "Tarjeta de identidad" }));
         this.comboBoxDocumentType.setSize(312,35);
         generalGbc(1,0,1,3);
         this.add(this.comboBoxDocumentType, gbc);
@@ -143,10 +149,17 @@ public class BodyClients extends BodyPanel {
     private void optionPaneDelete() {
         int option = JOptionPane.showConfirmDialog(null, "Desea eliminar al cliente?", "Eliminar", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
-            // eliminar al cliente
+            deleteClient();
         }else {
             JOptionPane.showMessageDialog(null, "Cliente no eliminado");
         }
+    }
+
+    private void deleteClient() {
+        clients.remove(selectedClient);
+        eventsView.showNormalHeaderClients();
+        eventsView.openSelectedPerson();
+        panelClients.getHeaderClients().setListClients(clients);
     }
 
     public void buttonCheck(){
@@ -159,7 +172,7 @@ public class BodyClients extends BodyPanel {
             setEdit(false);
             inabiliteFields();
             eventsView.showNormalHeaderClients();
-            eventsView.enableFooterButtons();
+            eventsView.openSelectedPerson();
         });
     }
 
@@ -210,5 +223,31 @@ public class BodyClients extends BodyPanel {
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
+    }
+
+    public void setListClients(List<Person> clients) {
+        this.clients = clients;
+    }
+    public void showClientData(Person client){
+        this.selectedClient = client;
+        this.comboBoxDocumentType.setSelectedItem(setDocumentType(client.isAdult()));
+        this.textFieldDocument.setText(client.getDocument());
+        this.textFieldName.setText(client.getName());
+        this.textFieldLastName.setText(client.getLastName());
+        this.textFieldAddress.setText(client.getAddress());
+        this.CityAdress.setText(client.getCity());
+    }
+
+    private Object setDocumentType(boolean isAdult) {
+        System.out.println(isAdult);
+        if (isAdult){
+            return comboBoxDocumentType.getItemAt(0);
+        }else {
+            return comboBoxDocumentType.getItemAt(1);
+        }
+    }
+
+    public void setPanelClients(PanelClients panelClients) {
+        this.panelClients = panelClients;
     }
 }
