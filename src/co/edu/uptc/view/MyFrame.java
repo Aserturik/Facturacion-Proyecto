@@ -13,6 +13,7 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     private Contract.Presenter presenter;
     private PrincipalPanel principalPanel;
     private List<Person> clients;
+    private List<Product> products;
 
     public MyFrame() {
         super("Facturacion");
@@ -56,7 +57,7 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     @Override
     public void setProducts(List<Product> products) {
         System.out.println("setProducts");
-        //principalPanel.getPanelProducts().setProducts(products);
+        this.products = products;
     }
 
     @Override
@@ -178,7 +179,11 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
         }
     }
 
-    private void disableFooterButtons(){
+    public List<Person> getClients(String text){
+        return presenter.getClients(text);
+    }
+
+    public void disableFooterButtons(){
         System.out.println("disableFooterButtons()");
         principalPanel.disableFooterButtons();
     }
@@ -197,5 +202,40 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     public List<Person> getClients() {
         return clients;
+    }
+
+    public boolean isPersonExist(boolean isAdult, String document){
+        return presenter.isPersonExist(isAdult,document);
+    }
+
+    public boolean isValidDocument(String document){
+        return presenter.isValidDocument(document);
+    }
+
+    public List<Person> getNewClients(Person newPerson) {
+        return presenter.getNewClients(newPerson);
+    }
+
+    public boolean getEditClients(int indexOf, Person newPerson) {
+        return presenter.getEditClients(indexOf,newPerson);
+    }
+
+    public List<Product> getProducts() {
+        return this.products;
+    }
+    public List<Product> getProducts(String text) {
+        return presenter.getProducts(text);
+    }
+
+    public boolean isProductExist(String ciu, String barCode){
+        return presenter.isProductExist(ciu,barCode);
+    }
+
+    public List<Product> getNewProducts(Product newProduct) {
+        return presenter.getNewProducts(newProduct);
+    }
+
+    public boolean isEditProduct(int index, Product newProduct) {
+        return presenter.isEditProduct(index,newProduct);
     }
 }

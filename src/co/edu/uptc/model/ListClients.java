@@ -2,14 +2,17 @@ package co.edu.uptc.model;
 
 import co.edu.uptc.model.dinamic.UptcList;
 import co.edu.uptc.pojo.Person;
+import co.edu.uptc.presenter.Contract;
 
 import java.util.List;
 
 public class ListClients implements Cloneable{
     private List<Person> clientsOriginal;
     private List<Person> clientsClone;
+    private Contract.Model model;
 
-    public ListClients() {
+    public ListClients(Contract.Model model) {
+        this.model = model;
         loadClients();
         loadClientsClone();
     }
@@ -35,8 +38,59 @@ public class ListClients implements Cloneable{
         }
     }
 
+    public boolean isSearch(boolean isAdult, String documentNumber){
+        boolean isSearch = false;
+        for ( Person client : clientsClone ) {
+            if (client.isAdult() == isAdult && client.getDocument().equals(documentNumber)) {
+                isSearch = true;
+                break;
+            }
+        }
+        return isSearch;
+    }
+
+    public List<Person> searchAllPersons(String character) {
+        UptcList<Person> list = new UptcList<>();
+        for (Person person : clientsClone) {
+            if (person.getDocument().toLowerCase().contains(character) ||
+                    person.getName().toLowerCase().contains(character) ||
+                    person.getLastName().toLowerCase().contains(character) ||
+                    person.getAddress().toLowerCase().contains(character) ||
+                    person.getCity().toLowerCase().contains(character))
+                list.add(person);
+        }
+        return list;
+    }
+
     public List<Person> getClientsClone() {
         return clientsClone;
     }
 
+    public boolean isValidDocument(String document) {
+        try {
+            Integer.parseInt(document);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public List<Person> getNewClients(Person newPerson) {
+        clientsOriginal.add(newPerson);
+        clientsClone.add(newPerson.clone(newPerson));
+        return clientsClone;
+    }
+
+    public boolean getEditClients(int indexOf, Person newPerson) {
+        clientsOriginal.set(indexOf, newPerson);
+        clientsClone.set(indexOf, newPerson.clone(newPerson));
+
+        model.setListClientsView(clientsClone);
+        // hacer la condicion de editar siempre y cuando no este referenciado en una factura
+        return true;
+    }
+
+    public Contract.Model getModel() {
+        return model;
+    }
 }

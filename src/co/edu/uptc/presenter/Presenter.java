@@ -57,7 +57,7 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void saveAllClients(List<Person> clients) {
-
+        view.setClients(clients);
     }
 
     @Override
@@ -84,4 +84,49 @@ public class Presenter implements Contract.Presenter {
     public boolean deleteBill(Bill bill) {
         return false;
     }
+    @Override
+    public boolean isPersonExist(boolean isAdult, String document){
+        return model.isPersonExist(isAdult, document);
+    }
+
+    @Override
+    public boolean isValidDocument(String document) {
+        return model.isValidDocument(document);
+    }
+
+    @Override
+    public List<Person> getClients(String text) {
+        return model.getClients(text);
+    }
+
+    @Override
+    public List<Person> getNewClients(Person newPerson) {
+        return model.getNewClients(newPerson);
+    }
+
+    @Override
+    public boolean getEditClients(int indexOf, Person newPerson) {
+        return model.getEditClients(indexOf, newPerson);
+    }
+
+    @Override
+    public List<Product> getProducts(String text) {
+        return model.getProducts(text);
+    }
+
+    @Override
+    public boolean isProductExist(String ciu, String barCode) {
+        return model.isProductExist(ciu, barCode);
+    }
+
+    @Override
+    public List<Product> getNewProducts(Product newProduct) {
+        return model.getNewProducts(newProduct);
+    }
+
+    @Override
+    public boolean isEditProduct(int index, Product newProduct) {
+        return model.isEditProduct(index, newProduct);
+    }
+
 }

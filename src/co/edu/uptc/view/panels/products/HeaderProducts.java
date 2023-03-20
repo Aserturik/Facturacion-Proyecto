@@ -1,25 +1,29 @@
 package co.edu.uptc.view.panels.products;
-
-import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.pojo.Person;
+import co.edu.uptc.pojo.Product;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.MyFrame;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class HeaderProducts extends HeaderPanel {
     private TextFieldGray searchTextField;
     private GrayButton searchButton;
     private JComboBox<String> productsComboBox;
-    private UptcList<String> productsList;
+    private List<Product> products;
     private GridBagConstraints gbc;
     private JLabel grayLabel;
+    private PanelProducts panelProducts;
     private EventsView eventsView;
 
-    public HeaderProducts(EventsView eventsView) {
+    public HeaderProducts(EventsView eventsView, PanelProducts panelProducts) {
         super();
+        this.panelProducts = panelProducts;
         this.setEventsView(eventsView);
         this.setLayout(new GridBagLayout());
         this.setBackground(new java.awt.Color(255, 255, 255));
@@ -29,6 +33,8 @@ public class HeaderProducts extends HeaderPanel {
     private void initComponents(){
         this.gbc = new GridBagConstraints();
         grayLabel = new JLabel();
+        this.products = panelProducts.getPrincipalPanel().getFrame().getProducts();
+
         productsComboBox();
         searchTextField();
         searchButton();
@@ -53,10 +59,33 @@ public class HeaderProducts extends HeaderPanel {
         generalGbc();
         gbc.insets = new Insets(82,60,15,0);
         this.add(this.productsComboBox, gbc);
+        setListProducts(products);
+        listenersComboBox();
+    }
+
+    public void setListProducts(List<Product> products){
+        this.productsComboBox.removeAllItems();
+        for (Product product : products) {
+            this.productsComboBox.addItem(product.getDescription());
+        }
+    }
+
+    public Product getSelectedProduct(int index){
+        if(index == -1){
+            return products.get(0);
+        }
+        return products.get(index);
+    }
+
+    public void listenersComboBox() {
+        this.productsComboBox.addActionListener(e -> {
+            panelProducts.getBodyProducts().setProductSelected(getSelectedProduct(productsComboBox.getSelectedIndex()));
+            panelProducts.getBodyProducts().showProductData(getSelectedProduct(productsComboBox.getSelectedIndex()));
+        });
     }
 
     public void searchTextField(){
-        this.searchTextField = new TextFieldGray("CIU del producto");
+        this.searchTextField = new TextFieldGray("Descripción del producto");
         this.searchTextField.setSize(272,42);
         this.searchTextField.setBounds(10, 10, 200, 30);
         generalGbc();
@@ -73,6 +102,15 @@ public class HeaderProducts extends HeaderPanel {
         gbc.gridx = 2;
         gbc.insets = new Insets(82,0,15,80);
         this.add(this.searchButton, gbc);
+
+        this.searchButton.addActionListener(e -> {
+            List<Product> productsListOriginal = products;
+            if (searchTextField.getText().equals("CIU del producto") || searchTextField.getText().equals("")) {
+                setListProducts(productsListOriginal);
+            } else {
+                setListProducts(getFrame().getProducts(searchTextField.getText()));
+            }
+        });
     }
 
     public void ocultSearch(){
@@ -121,19 +159,15 @@ public class HeaderProducts extends HeaderPanel {
         this.productsComboBox = productsComboBox;
     }
 
-    public UptcList<String> getProductsList() {
-        return productsList;
-    }
-
-    public void setProductsList(UptcList<String> productsList) {
-        this.productsList = productsList;
-    }
-
     public EventsView getEventsView() {
         return eventsView;
     }
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
+    }
+
+    public MyFrame getFrame() {
+        return panelProducts.getFrame();
     }
 }

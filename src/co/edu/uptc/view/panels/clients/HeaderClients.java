@@ -3,6 +3,7 @@ package co.edu.uptc.view.panels.clients;
 import co.edu.uptc.model.dinamic.UptcList;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.MyFrame;
 import co.edu.uptc.view.buttons.GrayButton;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
@@ -65,6 +66,7 @@ public class HeaderClients extends HeaderPanel {
 
     public void listenerComboBox(){
         clientsComboBox.addActionListener(e -> {
+            panelClients.getBodyClients().setSelectedClient(getSelectedClient(clientsComboBox.getSelectedIndex()));
             panelClients.getBodyClients().showClientData(getSelectedClient(clientsComboBox.getSelectedIndex()));
         });
     }
@@ -87,6 +89,15 @@ public class HeaderClients extends HeaderPanel {
         gbc.gridx = 2;
         gbc.insets = new Insets(82,0,15,80);
         this.add(this.searchButton, gbc);
+        
+        this.searchButton.addActionListener(e -> {
+            List<Person> personListOriginal = clientsList;
+            if (searchTextField.getText().equals("")){
+                setListClients(personListOriginal);
+            }else{
+                setListClients(getFrame().getClients(searchTextField.getText()));
+            }
+        });
     }
 
     public void ocultSearch(){
@@ -110,11 +121,6 @@ public class HeaderClients extends HeaderPanel {
         this.searchButton.setVisible(true);
         this.grayLabel.setVisible(false);
     }
-
-    public void setClientsList(List<Person> clientsList) {
-        this.clientsList = clientsList;
-    }
-
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
     }
@@ -126,7 +132,7 @@ public class HeaderClients extends HeaderPanel {
         }
     }
 
-    private Person getSelectedClient(int index){
+    public Person getSelectedClient(int index){
         if (index == -1){
             return clientsList.get(0);
         }
@@ -141,4 +147,15 @@ public class HeaderClients extends HeaderPanel {
         return panelClients;
     }
 
+    public void setClientsComboBox(JComboBox<String> clientsComboBox) {
+        this.clientsComboBox = clientsComboBox;
+    }
+
+    public JComboBox<String> getClientsComboBox() {
+        return clientsComboBox;
+    }
+    
+    public MyFrame getFrame(){
+        return panelClients.getPrincipalPanel().getFrame();
+    }
 }

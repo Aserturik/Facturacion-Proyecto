@@ -1,12 +1,14 @@
 package co.edu.uptc.pojo;
 
 public class Product {
-    private int ciu;
+    private static int id;
+    private String  ciu;
     private String barCode;
     private String description;
     private double price;
 
-    public Product(int ciu, String barCode, String description, double price) {
+    public Product(String ciu, String barCode, String description, double price) {
+        id++;
         this.ciu = ciu;
         this.barCode = barCode;
         this.description = description;
@@ -16,11 +18,15 @@ public class Product {
     public Product() {
     }
 
-    public int getCiu() {
-        return ciu;
+    public Product clone(Product product){
+        return new Product(ciu, barCode, description, price);
     }
 
-    public void setCiu(int ciu) {
+    public String getCiu() {
+        return ""+ciu;
+    }
+
+    public void setCiu(String ciu) {
         this.ciu = ciu;
     }
 

@@ -57,7 +57,7 @@ public class FooterPanel extends JPanel {
 
     public void billButton(){
         // hay que cambiarlo al original
-        this.billButton.addActionListener(evt -> eventsView.openEditBill());
+        this.billButton.addActionListener(evt -> eventsView.openBill());
     }
 
     public void disableButtons(){

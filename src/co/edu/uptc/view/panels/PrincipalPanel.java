@@ -1,6 +1,7 @@
 package co.edu.uptc.view.panels;
 
 import co.edu.uptc.pojo.Person;
+import co.edu.uptc.pojo.Product;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.MyFrame;
 import co.edu.uptc.view.panels.bill.PanelBill;
@@ -39,7 +40,7 @@ public class PrincipalPanel extends JPanel {
         panelHome = new PanelHome(eventsView);
         panelClients = new PanelClients(eventsView,this);
         panelClients.setPrincipalPanel(this);
-        panelProducts = new PanelProducts(eventsView);
+        panelProducts = new PanelProducts(eventsView, this);
         panelBill = new PanelBill(eventsView);
         panelEditBill = new PanelEditBill(eventsView);
         footerPanel = new FooterPanel(eventsView);
@@ -88,6 +89,9 @@ public class PrincipalPanel extends JPanel {
         panelProducts.setVisible(false);
         panelBill.setVisible(false);
         panelEditBill.setVisible(false);
+        int index = panelClients.getHeaderClients().getClientsComboBox().getSelectedIndex();
+        Person p = panelClients.getHeaderClients().getSelectedClient(index);
+        panelClients.getBodyClients().showClientData(p);
     }
 
     private void panelProducts(){
@@ -102,6 +106,9 @@ public class PrincipalPanel extends JPanel {
         panelProducts.setVisible(true);
         panelEditBill.setVisible(false);
         panelBill.setVisible(false);
+        int index = panelProducts.getHeaderProducts().getProductsComboBox().getSelectedIndex();
+        Product p = panelProducts.getHeaderProducts().getSelectedProduct(index);
+        panelProducts.getBodyProducts().showProductData(p);
     }
 
     private void panelBill(){

@@ -30,6 +30,21 @@ public interface Contract {
         boolean deleteClient(Person client);
         boolean deleteProduct(Product product);
         boolean deleteBill(Bill bill);
+        boolean isPersonExist(boolean isAdult, String document);
+        boolean isValidDocument(String document);
+        List<Person> getClients(String text);
+
+        List<Person> getNewClients(Person clients);
+
+        boolean getEditClients(int indexOf, Person newPerson);
+
+        List<Product> getProducts(String text);
+
+        boolean isProductExist(String ciu, String barCode);
+
+        List<Product> getNewProducts(Product products);
+
+        boolean isEditProduct(int index, Product newProduct);
     }
 
     interface Model{
@@ -37,5 +52,23 @@ public interface Contract {
         List<Person> getClients();
         List<Product> getProducts();
         List<Bill> getBills();
+        boolean isPersonExist(boolean isAdult, String document);
+        boolean isValidDocument(String document);
+
+        List<Person> getClients(String text);
+
+        List<Person> getNewClients(Person newPerson);
+
+        boolean getEditClients(int indexOf, Person newPerson);
+
+        void setListClientsView(List<Person> clientsClone);
+
+        List<Product> getProducts(String text);
+
+        boolean isProductExist(String ciu, String barCode);
+
+        List<Product> getNewProducts(Product newProduct);
+
+        boolean isEditProduct(int index, Product newProduct);
     }
 }
