@@ -1,8 +1,10 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Bill;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
+import co.edu.uptc.view.panels.PrincipalPanel;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
 import javax.swing.*;
@@ -19,9 +21,11 @@ public class HeaderEditBill extends HeaderPanel {
     private Person actualClient;
     private EventsView eventsView;
     private GridBagConstraints gbc;
-    public HeaderEditBill(EventsView eventsView) {
+    private PrincipalPanel principalPanel;
+    public HeaderEditBill(EventsView eventsView, PrincipalPanel principalPanel) {
         super();
         this.setEventsView(eventsView);
+        this.principalPanel = principalPanel;
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setLayout(new java.awt.GridBagLayout());
         gbc = new GridBagConstraints();
@@ -152,5 +156,11 @@ public class HeaderEditBill extends HeaderPanel {
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
+    }
+
+    public void loadEditBill(Bill bill) {
+        numberBillText.setText(""+bill.getId());
+        clientNameActualText.setText(bill.getClient().getName());
+        date.setText(bill.getDate().toString());
     }
 }

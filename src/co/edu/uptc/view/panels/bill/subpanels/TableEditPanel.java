@@ -1,14 +1,22 @@
 package co.edu.uptc.view.panels.bill.subpanels;
 
 import co.edu.uptc.model.dinamic.UptcList;
+import co.edu.uptc.pojo.Bill;
+import co.edu.uptc.pojo.Buy;
+import co.edu.uptc.pojo.Product;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
+import co.edu.uptc.view.panels.PrincipalPanel;
 import co.edu.uptc.view.textfield.TextFieldGray;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class TableEditPanel extends JPanel {
@@ -22,11 +30,14 @@ public class TableEditPanel extends JPanel {
     private JLabel productsValue, ivaValue, totalPay;
     private JLabel productsValueText, ivaValueText, totalPayText;
     private GridBagConstraints gbc;
+    private PrincipalPanel principalPanel;
+    private Bill bill;
 
-    public TableEditPanel(EventsView eventsView) {
+    public TableEditPanel(EventsView eventsView, PrincipalPanel principalPanel) {
+        this.principalPanel = principalPanel;
         this.setEventsView(eventsView);
         this.setBackground(new Color(255, 255, 255));
-        this.setSize(837,451);
+        this.setSize(837, 451);
         this.setMinimumSize(new java.awt.Dimension(837, 451));
         this.setMaximumSize(new java.awt.Dimension(837, 451));
         this.setPreferredSize(new java.awt.Dimension(837, 451));
@@ -35,17 +46,56 @@ public class TableEditPanel extends JPanel {
         initComponents();
     }
 
-    private void initComponents(){
-        tableEdit = new JTable(0,5);
+    private void initComponents() {
+        tableEdit = new JTable(0, 5);
         tableHeaderTemplate(tableEdit.getTableHeader());
         tableModelTemplate();
         billList();
         addTable();
+        addTableListeners();
         addProductBill();
         values();
     }
 
-    private void tableHeaderTemplate(JTableHeader tableHeader){
+    private DescriptionEditPanel getDesciptionEditPanel(){
+        return principalPanel.getPanelEditBill().getBodyPanelEditBill().getDescriptionEditPanel();
+    }
+
+    private void addTableListeners() {
+        tableEdit.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = tableEdit.getSelectedRow();
+                if(selectedRow != -1){
+                    if(e.getClickCount() == 1){
+                        getDesciptionEditPanel().setDesciption(bill.getBuys().get(selectedRow).getProduct().getDescription());
+                    }
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void tableHeaderTemplate(JTableHeader tableHeader) {
         tableEdit.getColumnModel().getColumn(0).setHeaderValue("N");
         tableEdit.getColumnModel().getColumn(1).setHeaderValue("Codigo Producto");
         tableEdit.getColumnModel().getColumn(2).setHeaderValue("Precio Unitario");
@@ -56,9 +106,9 @@ public class TableEditPanel extends JPanel {
         tableHeader.setReorderingAllowed(false);
         tableHeader.setResizingAllowed(false);
     }
-    
-    private void tableModelTemplate(){
-        tableEdit.setEnabled(false);
+
+    private void tableModelTemplate() {
+        tableEdit.setEnabled(true);
         tableEdit.setRowHeight(26);
         tableEdit.setShowGrid(false);
         tableEdit.setShowHorizontalLines(true);
@@ -67,29 +117,52 @@ public class TableEditPanel extends JPanel {
         tableEdit.setBackground(new Color(255, 255, 255));
     }
 
-    private void billList(){
+    private void billList() {
         listBill = new UptcList<>();
     }
 
-    private void addTable(){
+    private void addTable() {
         JScrollPane scrollPane = new JScrollPane(tableEdit);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setSize(755,267);
-        scrollPane.setMinimumSize(new Dimension(755,267));
-        scrollPane.setMaximumSize(new Dimension(755,267));
+        scrollPane.setSize(755, 267);
+        scrollPane.setMinimumSize(new Dimension(755, 267));
+        scrollPane.setMaximumSize(new Dimension(755, 267));
         scrollPane.setPreferredSize(new Dimension(755, 267));
         add(scrollPane, new GridBagConstraints(0, 0, 3, 1, 0, 0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(15, 56, 0, 26),
                 0, 0));
     }
 
+    public void loadEditBill(Bill bill) {
+        this.bill = bill;
+        tableEdit.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[bill.getBuys().size()][5],
+                new String[]{
+                        "N", "Codigo del Producto", "Precio Unitario", "Cantidad", "Borrar"
+                }
+        ));
+
+        for (int i = 0; i < bill.getBuys().size(); i++) {
+            tableEdit.setValueAt(i + 1, i, 0);
+            tableEdit.setValueAt(bill.getBuys().get(i).getProduct().getCiu(), i, 1);
+            tableEdit.setValueAt(bill.getBuys().get(i).getProduct().getPrice(), i, 2);
+            tableEdit.setValueAt(bill.getBuys().get(i).getQuantity(), i, 3);
+            tableEdit.setValueAt(new GrayButton("Borrar"), i, 4);
+        }
+
+        productsValue.setText(String.valueOf(bill.getTotal()));
+        ivaValue.setText(String.valueOf(bill.getIva()));
+        totalPay.setText(String.valueOf(bill.getTotalPrice() + bill.getIva()));
+        repaint();
+    }
+
     // Elementos del Footer
 
-    private JLabel getFormatLabel(JLabel label,int whidth, int heigth){
-        label.setSize(whidth,heigth);
-        label.setPreferredSize(new Dimension(whidth,heigth));
-        label.setMinimumSize(new Dimension(whidth,heigth));
-        label.setMaximumSize(new Dimension(whidth,heigth));
+    private JLabel getFormatLabel(JLabel label, int whidth, int heigth) {
+        label.setSize(whidth, heigth);
+        label.setPreferredSize(new Dimension(whidth, heigth));
+        label.setMinimumSize(new Dimension(whidth, heigth));
+        label.setMaximumSize(new Dimension(whidth, heigth));
         label.setOpaque(true);
         label.setFont(new java.awt.Font("Cabin", 1, 24));
         label.setBackground(new java.awt.Color(217, 217, 217));
@@ -98,14 +171,14 @@ public class TableEditPanel extends JPanel {
         return label;
     }
 
-    private void addProductBill(){
+    private void addProductBill() {
         addProductLabel();
         productCode();
         quantity();
         addProductButton();
     }
 
-    private void addProductLabel(){
+    private void addProductLabel() {
         addProductLabel = new JLabel("Agregar Producto");
         addProductLabel = getFormatLabel(addProductLabel, 605, 21);
         addProductLabel.setFont(new Font("Cabin", Font.PLAIN, 13));
@@ -114,10 +187,10 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridwidth = 3;
         gbc.insets = new Insets(15, 0, 0, 0);
-        add(addProductLabel,gbc);
+        add(addProductLabel, gbc);
     }
 
-    private void productCode(){
+    private void productCode() {
         productCode = new TextFieldGray("Codigo Producto");
         productCode.setSmall();
         productCode.setPreferredSize(new Dimension(202, 21));
@@ -125,10 +198,10 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 115, 0, 0);
-        add(productCode,gbc);
+        add(productCode, gbc);
     }
 
-    private void quantity(){
+    private void quantity() {
         quantity = new TextFieldGray("Cantidad");
         quantity.setSmall();
         quantity.setPreferredSize(new Dimension(202, 21));
@@ -136,10 +209,10 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 0, 0);
-        add(quantity,gbc);
+        add(quantity, gbc);
     }
 
-    private void addProductButton(){
+    private void addProductButton() {
         addProductButton = new GrayButton("Añadir a la factura");
         addProductButton.setSize(202, 21);
         addProductButton.setPreferredSize(new Dimension(202, 21));
@@ -150,7 +223,25 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 2;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 0, 115);
-        add(addProductButton,gbc);
+        add(addProductButton, gbc);
+        listenerAddButton();
+    }
+
+    private void listenerAddButton(){
+        addProductButton.addActionListener(e -> {
+            boolean isValidCode = principalPanel.getFrame().getProduct(productCode.getText()) != null;
+            boolean isValidQuantity = Integer.parseInt(this.quantity.getText()) > 0;
+            if(isValidCode && isValidQuantity){
+                Product product =  principalPanel.getFrame().getProduct(productCode.getText());
+                int quantity = Integer.parseInt(this.quantity.getText());
+                bill.getBuys().add(new Buy(product,quantity));
+                loadEditBill(bill);
+            }else if(!isValidCode){
+                JOptionPane.showMessageDialog(null, "El codigo del producto no es valido");
+            }else if(!isValidQuantity){
+                JOptionPane.showMessageDialog(null, "La cantidad no es valida");
+            }
+        });
     }
 
     public void values() {
@@ -171,7 +262,7 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(10, 115, 0, 0);
-        add(productsValueText,gbc);
+        add(productsValueText, gbc);
     }
 
     private void productsValue() {
@@ -182,7 +273,7 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 115, 0, 0);
-        add(productsValue,gbc);
+        add(productsValue, gbc);
     }
 
     private void ivaValueText() {
@@ -194,7 +285,7 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(10, 0, 0, 0);
-        add(ivaValueText,gbc);
+        add(ivaValueText, gbc);
     }
 
     private void ivaValue() {
@@ -205,7 +296,7 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 0, 0);
-        add(ivaValue,gbc);
+        add(ivaValue, gbc);
     }
 
     private void totalPayText() {
@@ -217,7 +308,7 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 2;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(10, 0, 0, 115);
-        add(totalPayText,gbc);
+        add(totalPayText, gbc);
     }
 
     private void totalPay() {
@@ -228,10 +319,10 @@ public class TableEditPanel extends JPanel {
         gbc.gridx = 2;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(0, 0, 0, 115);
-        add(totalPay,gbc);
+        add(totalPay, gbc);
     }
 
-    public void addRow(String[] row){
+    public void addRow(String[] row) {
         DefaultTableModel model = (DefaultTableModel) tableEdit.getModel();
         model.addRow(row);
     }

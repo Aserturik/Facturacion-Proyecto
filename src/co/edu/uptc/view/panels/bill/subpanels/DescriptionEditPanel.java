@@ -1,5 +1,6 @@
 package co.edu.uptc.view.panels.bill.subpanels;
 
+import co.edu.uptc.pojo.Bill;
 import co.edu.uptc.view.EventsView;
 import co.edu.uptc.view.buttons.GrayButton;
 
@@ -117,5 +118,14 @@ public class DescriptionEditPanel extends JPanel {
 
     public void setEventsView(EventsView eventsView) {
         this.eventsView = eventsView;
+    }
+
+    public void loadEditBill(Bill bill) {
+
+    }
+
+    public void setDesciption(String s) {
+        descriptionArea.setText(s);
+        repaint();
     }
 }

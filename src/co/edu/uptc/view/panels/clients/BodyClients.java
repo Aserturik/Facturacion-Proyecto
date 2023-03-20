@@ -332,7 +332,6 @@ public class BodyClients extends BodyPanel {
     }
 
     private Object setDocumentType(boolean isAdult) {
-        System.out.println(isAdult);
         if (isAdult) {
             return comboBoxDocumentType.getItemAt(0);
         } else {
@@ -382,5 +381,10 @@ public class BodyClients extends BodyPanel {
             this.buttonAdd.opacity(1f);
             this.buttonCheck.opacity(0.5f);
         }
+    }
+
+    public void selectClient() {
+        isModeSelected = true;
+
     }
 }

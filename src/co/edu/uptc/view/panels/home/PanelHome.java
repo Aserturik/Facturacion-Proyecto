@@ -23,6 +23,5 @@ public class PanelHome extends DefaultPanel {
         this.setBodyPanel(bodyPanelHome);
         this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
         bodyPanelHome.setEventsView(this.getEventsView());
-        System.out.println("PanelHome.body getEventsView: " + this.getEventsView());
     }
 }

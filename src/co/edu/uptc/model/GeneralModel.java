@@ -1,6 +1,7 @@
 package co.edu.uptc.model;
 
 import co.edu.uptc.pojo.Bill;
+import co.edu.uptc.pojo.Buy;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.pojo.Product;
 import co.edu.uptc.presenter.Contract;
@@ -11,10 +12,14 @@ public class GeneralModel implements Contract.Model{
     Contract.Presenter presenter;
     ListClients listClients;
     ListProducts listProducts;
+    ListBills listBills;
+    ListBuys listBuys;
 
     public GeneralModel(){
         listClients = new ListClients(this);
         listProducts = new ListProducts(this);
+        listBuys = new ListBuys(this);
+        listBills = new ListBills(this);
     }
 
     @Override
@@ -34,7 +39,7 @@ public class GeneralModel implements Contract.Model{
 
     @Override
     public List<Bill> getBills() {
-        return null;
+        return listBills.getBillsClone();
     }
 
     @Override
@@ -85,5 +90,15 @@ public class GeneralModel implements Contract.Model{
     @Override
     public boolean isEditProduct(int index, Product newProduct) {
         return listProducts.isEditProduct(index, newProduct);
+    }
+
+    @Override
+    public List<Buy> getBuys() {
+        return listBuys.getBuysClone();
+    }
+
+    @Override
+    public Product getProduct(String text) {
+        return listProducts.searchProduct(text);
     }
 }

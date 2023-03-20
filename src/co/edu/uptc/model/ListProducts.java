@@ -20,11 +20,11 @@ public class ListProducts {
     private void loadProducts() {
         products = new UptcList<>();
         products.add(new Product("123", "#dflajlsdf933e", "Cerveza", 1000));
-        products.add(new Product("12313", "#daue23lj34ahd", "Coca Cola personal", 2000));
-        products.add(new Product("324423", "#dfaeu83ahd", "Cafe Colombiano", 3000));
-        products.add(new Product("14234", "#797977ahd", "Cerveza Irlandeza", 4000));
-        products.add(new Product("124234", "#dflajlsdf933e", "Cerveza Alemana", 5000));
-        products.add(new Product("564322", "#0094dyf43a", "Cerveza Belga", 6000));
+        products.add(new Product("132", "#daue23lj34ahd", "Coca Cola personal", 2000));
+        products.add(new Product("324", "#dfaeu83ahd", "Cafe Colombiano", 3000));
+        products.add(new Product("142", "#797977ahd", "Cerveza Irlandeza", 4000));
+        products.add(new Product("124", "#dflajlsdf933e", "Cerveza Alemana", 5000));
+        products.add(new Product("456", "#0094dyf43a", "Cerveza Belga", 6000));
     }
 
     private void loadProductsClone() {
@@ -70,5 +70,22 @@ public class ListProducts {
     public boolean isEditProduct(int index, Product newProduct) {
         // TODO: 11/11/2019
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "ListProducts{" +
+                "products=" + products +
+                ", productsClone=" + productsClone +
+                '}';
+    }
+
+    public Product searchProduct(String text) {
+        for (Product product : productsClone) {
+            if (product.getCiu().equals(text)) {
+                return product;
+            }
+        }
+        return null;
     }
 }

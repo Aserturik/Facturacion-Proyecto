@@ -2,6 +2,7 @@ package co.edu.uptc.view.panels.bill;
 
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.panels.PrincipalPanel;
 import co.edu.uptc.view.panels.fathers.HeaderPanel;
 
 import java.awt.*;
@@ -9,8 +10,11 @@ import java.util.List;
 
 public class HeaderBill extends HeaderPanel {
     private String title = "FACTURAS";
-    public HeaderBill(EventsView eventsView) {
+    private EventsView eventsView;
+    private PrincipalPanel principalPanel;
+    public HeaderBill(EventsView eventsView, PrincipalPanel principalPanel) {
         super();
+        this.principalPanel = principalPanel;
         this.setEventsView(eventsView);
         this.setBackground(new java.awt.Color(255, 255, 255));
     }

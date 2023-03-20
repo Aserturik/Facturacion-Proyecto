@@ -11,6 +11,7 @@ public class Presenter implements Contract.Presenter {
     private List<Person> clients;
     private List<Product> products;
     private List<Bill> bills;
+    private List<Buy> buys;
 
     @Override
     public void setView(Contract.View view) {
@@ -38,6 +39,12 @@ public class Presenter implements Contract.Presenter {
     public void loadBills() {
         bills = model.getBills();
         view.setBills(bills);
+    }
+
+    @Override
+    public void loadBuys() {
+        buys = model.getBuys();
+        view.setBuys(buys);
     }
 
     @Override
@@ -127,6 +134,11 @@ public class Presenter implements Contract.Presenter {
     @Override
     public boolean isEditProduct(int index, Product newProduct) {
         return model.isEditProduct(index, newProduct);
+    }
+
+    @Override
+    public Product getProduct(String text) {
+        return model.getProduct(text);
     }
 
 }

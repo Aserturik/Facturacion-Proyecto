@@ -1,6 +1,7 @@
 package co.edu.uptc.view;
 
 import co.edu.uptc.pojo.Bill;
+import co.edu.uptc.pojo.Buy;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.pojo.Product;
 import co.edu.uptc.presenter.Contract;
@@ -14,6 +15,8 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     private PrincipalPanel principalPanel;
     private List<Person> clients;
     private List<Product> products;
+    private List<Bill> bills;
+    private List<Buy> buys;
 
     public MyFrame() {
         super("Facturacion");
@@ -50,33 +53,33 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     @Override
     public void setClients(List<Person> clientsClone) {
-        System.out.println("setClients");
         clients = clientsClone;
     }
 
     @Override
     public void setProducts(List<Product> products) {
-        System.out.println("setProducts");
         this.products = products;
     }
 
     @Override
     public void setBills(List<Bill> bills) {
-        System.out.println("setBills");
-        //principalPanel.getPanelBills().setBills(bills);
+        this.bills = bills;
+    }
+
+    @Override
+    public void setBuys(List<Buy> buys) {
+        this.buys = buys;
     }
 
     // Eventos de los paneles
     @Override
     public void openHome() {
-        System.out.println("openHome");
         saveAllLists();
         principalPanel.openHome();
     }
 
     @Override
     public void openClients() {
-        System.out.println("openClients");
         saveAllLists();
         principalPanel.openClients();
     }
@@ -84,14 +87,12 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     @Override
     public void openProducts() {
-        System.out.println("openProducts");
         saveAllLists();
         principalPanel.openProducts();
     }
 
     @Override
     public void openBill() {
-        System.out.println("openBill");
         saveAllLists();
         principalPanel.openBill();
     }
@@ -104,73 +105,64 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     @Override
     public void openEditBill(int index) {
-        System.out.println("openEditBill");
         principalPanel.openEditBill(index);
     }
 
     @Override
     public void openEditBill() {
-        System.out.println("openEditBill");
         principalPanel.openEditBill();
     }
     @Override
     public void openAddBill() {
-        System.out.println("openAddBill");
         principalPanel.openEditBill();
     }
 
     @Override
     public void searchBill() {
-        System.out.println("searchBill");
         //principalPanel.get
     }
 
     @Override
     public void saveBillAndExit() {
-        System.out.println("saveBillAndExit");
         principalPanel.openBill();
     }
 
     @Override
     public void ocultHeaderClients() {
-        System.out.println("ocultHeaderClients");
         principalPanel.getPanelClients().ocultHeader();
     }
 
     @Override
     public void ocultHeaderProducts() {
-        System.out.println("ocultHeaderProducts");
         principalPanel.getPanelProducts().ocultHeader();
     }
 
     @Override
     public void showNormalHeaderClients(){
-        System.out.println("showNormalHeaderClients()");
         principalPanel.getPanelClients().showNormalHeader();
     }
 
     @Override
     public void comboBoxClients(){
-        System.out.println("comboBoxClients()");
         //principalPanel.getPanelClients().comboBoxClients();
     }
 
     @Override
     public void showNormalHeaderProducts(){
-        System.out.println("showNormalHeaderProducts()");
         principalPanel.getPanelProducts().showNormalHeader();
     }
 
     @Override
     public void selectClient(){
-        System.out.println("selectClient()");
+        principalPanel.getPanelClients().getBodyClients().selectClient();
+        principalPanel.getPanelClients().getBodyClients().inabiliteFields();
+        principalPanel.getPanelClients().getBodyClients().setEdit(true);
         principalPanel.openClients();
         disableFooterButtons();
     }
 
     @Override
     public void openSelectedPerson(){
-        System.out.println("openSelectedPerson()");
         if(!principalPanel.getFooterPanel().isEnableButtons()){
             enableFooterButtons();
             Person selectClient = principalPanel.getPanelClients().getSelectedClient();
@@ -184,19 +176,16 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
     }
 
     public void disableFooterButtons(){
-        System.out.println("disableFooterButtons()");
         principalPanel.disableFooterButtons();
     }
 
     @Override
     public void enableFooterButtons(){
-        System.out.println("enableFooterButtons()");
         principalPanel.enableFooterButtons();
     }
 
     @Override
     public void showClientData(Person client){
-        System.out.println("showClientData()");
         principalPanel.getPanelClients().showClientData(client);
     }
 
@@ -237,5 +226,17 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     public boolean isEditProduct(int index, Product newProduct) {
         return presenter.isEditProduct(index,newProduct);
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public List<Bill> getBills(String text) {
+        return bills;
+    }
+
+    public Product getProduct(String text) {
+        return presenter.getProduct(text);
     }
 }

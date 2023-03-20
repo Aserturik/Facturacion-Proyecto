@@ -2,6 +2,7 @@ package co.edu.uptc.view.panels.bill;
 
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.panels.PrincipalPanel;
 import co.edu.uptc.view.panels.bill.subpanels.PreviewBill;
 import co.edu.uptc.view.panels.bill.subpanels.ShowAllBills;
 import co.edu.uptc.view.panels.fathers.BodyPanel;
@@ -15,11 +16,13 @@ public class BodyBill extends BodyPanel {
     private ShowAllBills showAllBills;
     private GridBagConstraints gbc;
     private List<Person> listClients;
-    public BodyBill(EventsView eventsView) {
+    private PrincipalPanel principalPanel;
+    public BodyBill(EventsView eventsView, PrincipalPanel principalPanel) {
         super();
         this.setEventsView(eventsView);
-        showAllBills = new ShowAllBills(eventsView);
-        previewBill = new PreviewBill(eventsView);
+        this.principalPanel = principalPanel;
+        showAllBills = new ShowAllBills(eventsView, principalPanel);
+        previewBill = new PreviewBill(eventsView, principalPanel);
         this.setBackground(new Color(255, 255, 255));
         gbc = new GridBagConstraints();
         panelUp();
@@ -63,5 +66,45 @@ public class BodyBill extends BodyPanel {
         gbc.weighty = 1;
         gbc.insets = new Insets(40, 82, 0, 64);
         this.add(previewBill, gbc);
+    }
+
+    public PreviewBill getPreviewBill() {
+        return previewBill;
+    }
+
+    public void setPreviewBill(PreviewBill previewBill) {
+        this.previewBill = previewBill;
+    }
+
+    public ShowAllBills getShowAllBills() {
+        return showAllBills;
+    }
+
+    public void setShowAllBills(ShowAllBills showAllBills) {
+        this.showAllBills = showAllBills;
+    }
+
+    public GridBagConstraints getGbc() {
+        return gbc;
+    }
+
+    public void setGbc(GridBagConstraints gbc) {
+        this.gbc = gbc;
+    }
+
+    public List<Person> getListClients() {
+        return listClients;
+    }
+
+    public void setListClients(List<Person> listClients) {
+        this.listClients = listClients;
+    }
+
+    public PrincipalPanel getPrincipalPanel() {
+        return principalPanel;
+    }
+
+    public void setPrincipalPanel(PrincipalPanel principalPanel) {
+        this.principalPanel = principalPanel;
     }
 }

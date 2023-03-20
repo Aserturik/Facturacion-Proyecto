@@ -41,8 +41,8 @@ public class PrincipalPanel extends JPanel {
         panelClients = new PanelClients(eventsView,this);
         panelClients.setPrincipalPanel(this);
         panelProducts = new PanelProducts(eventsView, this);
-        panelBill = new PanelBill(eventsView);
-        panelEditBill = new PanelEditBill(eventsView);
+        panelBill = new PanelBill(eventsView,this);
+        panelEditBill = new PanelEditBill(eventsView,this);
         footerPanel = new FooterPanel(eventsView);
         panelHome();
         panelClients();
@@ -145,6 +145,7 @@ public class PrincipalPanel extends JPanel {
         panelProducts.setVisible(false);
         panelBill.setVisible(false);
         panelEditBill.setVisible(true);
+        getPanelEditBill().loadEditBill(frame.getBills().get(index));
     }
 
     private void footerPanel() {

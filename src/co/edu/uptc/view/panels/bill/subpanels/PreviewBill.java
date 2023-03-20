@@ -1,10 +1,13 @@
 package co.edu.uptc.view.panels.bill.subpanels;
 
+import co.edu.uptc.pojo.Bill;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.MyFrame;
+import co.edu.uptc.view.panels.PrincipalPanel;
+
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PreviewBill extends JPanel {
@@ -20,10 +23,12 @@ public class PreviewBill extends JPanel {
     private String billNumberText = "";
     private final String date = "dd/mm/aaaa";
     private JTable tableBill;
-    private List<String> listBill;
+    private List<Bill> listBill;
     private GridBagConstraints gbc;
-    public PreviewBill(EventsView eventsView) {
+    private PrincipalPanel principalPanel;
+    public PreviewBill(EventsView eventsView, PrincipalPanel principalPanel) {
         this.setEventsView(eventsView);
+        this.principalPanel = principalPanel;
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setSize(617,344);
         this.setMinimumSize(new java.awt.Dimension(617, 349));
@@ -69,7 +74,7 @@ public class PreviewBill extends JPanel {
     }
 
     private void billList(){
-        listBill = new ArrayList<>();
+        listBill = principalPanel.getFrame().getBills();
     }
 
     private void addTable(){
@@ -82,6 +87,27 @@ public class PreviewBill extends JPanel {
         add(scrollPane, new GridBagConstraints(0, 0, 2, 1, 1, 20,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(40, 0, 60, 0),
                 0, 0));
+    }
+
+    public void setBill(Bill bill){
+        tableBill.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[bill.getBuys().size()][6],
+                new String [] {
+                        "N", "CIU", "Descripción", "Precio Unitario", "Cantidad", "Total"
+                }
+        ));
+        for (int i = 0; i < bill.getBuys().size(); i++) {
+            tableBill.setValueAt(i+1, i, 0);
+            tableBill.setValueAt(bill.getBuys().get(i).getProduct().getCiu(), i, 1);
+            tableBill.setValueAt(bill.getBuys().get(i).getProduct().getDescription(), i, 2);
+            tableBill.setValueAt(bill.getBuys().get(i).getProduct().getPrice(), i, 3);
+            tableBill.setValueAt(bill.getBuys().get(i).getQuantity(), i, 4);
+            tableBill.setValueAt(bill.getBuys().get(i).getTotal(), i, 5);
+        }
+        productsValueText = String.valueOf(bill.getTotalPrice());
+        ivaValueText = String.valueOf(bill.getIva());
+        totalValueText = String.valueOf(bill.getTotalPrice() + bill.getIva());
+        repaint();
     }
 
     @Override
@@ -198,6 +224,12 @@ public class PreviewBill extends JPanel {
         gg.drawString(totalValueText, 440, 340);
     }
 
+    private MyFrame getFrame(){
+        return principalPanel.getFrame();
+    }
+
+    // GETTERS AND SETTERS
+
     public EventsView getEventsView() {
         return eventsView;
     }
@@ -270,11 +302,11 @@ public class PreviewBill extends JPanel {
         this.tableBill = tableBill;
     }
 
-    public List<String> getListBill() {
+    public List<Bill> getListBill() {
         return listBill;
     }
 
-    public void setListBill(List<String> listBill) {
+    public void setListBill(List<Bill> listBill) {
         this.listBill = listBill;
     }
 
@@ -284,5 +316,13 @@ public class PreviewBill extends JPanel {
 
     public void setGbc(GridBagConstraints gbc) {
         this.gbc = gbc;
+    }
+
+    public PrincipalPanel getPrincipalPanel() {
+        return principalPanel;
+    }
+
+    public void setPrincipalPanel(PrincipalPanel principalPanel) {
+        this.principalPanel = principalPanel;
     }
 }

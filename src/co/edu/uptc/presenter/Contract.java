@@ -1,6 +1,7 @@
 package co.edu.uptc.presenter;
 
 import co.edu.uptc.pojo.Bill;
+import co.edu.uptc.pojo.Buy;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.pojo.Product;
 
@@ -13,6 +14,7 @@ public interface Contract {
         void setClients(List<Person> clients);
         void setProducts(List<Product> products);
         void setBills(List<Bill> bills);
+        void setBuys(List<Buy> buys);
     }
 
     interface Presenter{
@@ -21,6 +23,7 @@ public interface Contract {
         void loadClients();
         void loadProducts();
         void loadBills();
+        void loadBuys();
         void saveClient(Person client);
         void saveProduct(Product product);
         void saveBill(Bill bill);
@@ -45,6 +48,8 @@ public interface Contract {
         List<Product> getNewProducts(Product products);
 
         boolean isEditProduct(int index, Product newProduct);
+
+        Product getProduct(String text);
     }
 
     interface Model{
@@ -70,5 +75,9 @@ public interface Contract {
         List<Product> getNewProducts(Product newProduct);
 
         boolean isEditProduct(int index, Product newProduct);
+
+        List<Buy> getBuys();
+
+        Product getProduct(String text);
     }
 }

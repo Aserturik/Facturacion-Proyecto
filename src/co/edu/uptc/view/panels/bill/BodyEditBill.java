@@ -1,7 +1,9 @@
 package co.edu.uptc.view.panels.bill;
 
+import co.edu.uptc.pojo.Bill;
 import co.edu.uptc.pojo.Person;
 import co.edu.uptc.view.EventsView;
+import co.edu.uptc.view.panels.PrincipalPanel;
 import co.edu.uptc.view.panels.bill.subpanels.DescriptionEditPanel;
 import co.edu.uptc.view.panels.bill.subpanels.TableEditPanel;
 import co.edu.uptc.view.panels.fathers.BodyPanel;
@@ -13,10 +15,12 @@ public class BodyEditBill extends BodyPanel {
     private DescriptionEditPanel descriptionEditPanel;
     private GridBagConstraints gbc;
     private EventsView eventsView;
+    private PrincipalPanel principalPanel;
 
-    public BodyEditBill(EventsView eventsView) {
+    public BodyEditBill(EventsView eventsView, PrincipalPanel principalPanel) {
         this.setEventsView(eventsView);
-        tableEditPanel = new TableEditPanel(eventsView);
+        this.principalPanel = principalPanel;
+        tableEditPanel = new TableEditPanel(eventsView, principalPanel);
         descriptionEditPanel = new DescriptionEditPanel(eventsView);
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
@@ -42,5 +46,14 @@ public class BodyEditBill extends BodyPanel {
 
     public EventsView getEventsView() {
         return eventsView;
+    }
+
+    public void loadEditBill(Bill bill) {
+        tableEditPanel.loadEditBill(bill);
+        descriptionEditPanel.loadEditBill(bill);
+    }
+
+    public DescriptionEditPanel getDescriptionEditPanel() {
+        return descriptionEditPanel;
     }
 }

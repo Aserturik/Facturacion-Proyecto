@@ -6,7 +6,7 @@ import co.edu.uptc.presenter.Contract;
 
 import java.util.List;
 
-public class ListClients implements Cloneable{
+public class ListClients{
     private List<Person> clientsOriginal;
     private List<Person> clientsClone;
     private Contract.Model model;
@@ -19,16 +19,16 @@ public class ListClients implements Cloneable{
 
     private void loadClients(){
         clientsOriginal = new UptcList<>();
-        clientsOriginal.add(new Person(true, 123, "Juan", "Perez", "Calle 1", "123456789"));
-        clientsOriginal.add(new Person(true, 456, "Maria", "Gomez", "Calle 2", "987654321"));
-        clientsOriginal.add(new Person(true, 789, "Pedro", "Gonzalez", "Calle 3", "123456789"));
-        clientsOriginal.add(new Person(false, 101, "Luisa", "Gutierrez", "Calle 4", "987654321"));
-        clientsOriginal.add(new Person(true, 112, "Carlos", "Ramirez", "Calle 5", "123456789"));
-        clientsOriginal.add(new Person(false, 131, "Camila", "Garcia", "Calle 6", "987654321"));
-        clientsOriginal.add(new Person(true, 141, "Andres", "Rodriguez", "Calle 7", "123456789"));
-        clientsOriginal.add(new Person(false, 151, "Sofia", "Hernandez", "Calle 8", "987654321"));
-        clientsOriginal.add(new Person(true, 161, "Jose", "Lopez", "Calle 9", "123456789"));
-        clientsOriginal.add(new Person(false, 171, "Laura", "Martinez", "Calle 10", "987654321"));
+        clientsOriginal.add(new Person(true, 123, "Juan", "Perez", "Calle 1", "new York"));
+        clientsOriginal.add(new Person(true, 456, "Maria", "Gomez", "Calle 2", "Miami"));
+        clientsOriginal.add(new Person(true, 789, "Pedro", "Gonzalez", "Calle 3", "Bogota"));
+        clientsOriginal.add(new Person(false, 101, "Luisa", "Gutierrez", "Calle 4", "Cali"));
+        clientsOriginal.add(new Person(true, 112, "Carlos", "Ramirez", "Calle 5", "Cartagena"));
+        clientsOriginal.add(new Person(false, 131, "Camila", "Garcia", "Calle 6", "Ciudad de Mexico"));
+        clientsOriginal.add(new Person(true, 141, "Andres", "Rodriguez", "Calle 7", "Miami"));
+        clientsOriginal.add(new Person(false, 151, "Sofia", "Hernandez", "Calle 8", "Guadalajara"));
+        clientsOriginal.add(new Person(true, 161, "Jose", "Lopez", "Calle 9", "Monteria"));
+        clientsOriginal.add(new Person(false, 171, "Laura", "Martinez", "Calle 10", "Duitama"));
     }
 
     private void loadClientsClone(){
@@ -92,5 +92,14 @@ public class ListClients implements Cloneable{
 
     public Contract.Model getModel() {
         return model;
+    }
+
+    @Override
+    public String toString() {
+        return "ListClients{" +
+                "clientsOriginal=" + clientsOriginal +
+                ", clientsClone=" + clientsClone +
+                ", model=" + model +
+                '}';
     }
 }

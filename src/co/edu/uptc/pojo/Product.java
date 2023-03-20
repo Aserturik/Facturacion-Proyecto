@@ -6,6 +6,7 @@ public class Product {
     private String barCode;
     private String description;
     private double price;
+    private int quantity;
 
     public Product(String ciu, String barCode, String description, double price) {
         id++;
@@ -52,6 +53,16 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public double getTotal() {
+        return price*quantity;
     }
 
     @Override
