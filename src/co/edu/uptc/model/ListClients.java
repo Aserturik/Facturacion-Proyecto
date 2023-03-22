@@ -81,6 +81,15 @@ public class ListClients{
         return clientsClone;
     }
 
+    public List<Person> getClientsNoFactura() {
+        UptcList<Person> list = new UptcList<>();
+        for (Person person : clientsClone) {
+            if (person.isAdult())
+                list.add(person);
+        }
+        return list;
+    }
+
     public boolean getEditClients(int indexOf, Person newPerson) {
         clientsOriginal.set(indexOf, newPerson);
         clientsClone.set(indexOf, newPerson.clone(newPerson));
@@ -101,5 +110,37 @@ public class ListClients{
                 ", clientsClone=" + clientsClone +
                 ", model=" + model +
                 '}';
+    }
+
+    public void setClients(List<Person> clientsInBills) {
+        clientsOriginal = clientsInBills;
+        loadClientsClone();
+    }
+
+    public String getClientsNoFacturaString() {
+        List<Person> clientsNoFactura = getClientsNoFactura();
+        String clients = "";
+        for (Person person : clientsNoFactura) {
+            clients += person.getName() + "\n";
+        }
+        return clients;
+    }
+
+    public List<Person> getClientsYesFactura() {
+        UptcList<Person> list = new UptcList<>();
+        for (Person person : clientsClone) {
+            if (!person.isAdult())
+                list.add(person);
+        }
+        return list;
+    }
+
+    public String getClientsYesFacturaString() {
+        List<Person> clientsYesFactura = getClientsYesFactura();
+        String clients = "";
+        for (Person person : clientsYesFactura) {
+            clients += person.getName() + "\n";
+        }
+        return clients;
     }
 }

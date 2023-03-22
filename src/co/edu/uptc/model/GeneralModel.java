@@ -101,4 +101,24 @@ public class GeneralModel implements Contract.Model{
     public Product getProduct(String text) {
         return listProducts.searchProduct(text);
     }
+
+    @Override
+    public void DeleteAllClientsNoFactura() {
+        listBills.deleteAllClientsNoFactura(getClients());
+    }
+
+    @Override
+    public void setClients(List<Person> clientsInBills) {
+        listClients.setClients(clientsInBills);
+    }
+
+    @Override
+    public String getClientsNoFactura() {
+        return listClients.getClientsNoFacturaString();
+    }
+
+    @Override
+    public String getClientsYesFactura() {
+        return listClients.getClientsYesFacturaString();
+    }
 }

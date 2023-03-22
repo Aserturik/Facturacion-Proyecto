@@ -10,6 +10,7 @@ import java.util.List;
 public class PanelClients extends DefaultPanel {
     private HeaderClients headerClients;
     private BodyClients bodyClients;
+    private BodyDeleteCients bodyDeleteCients;
     private EventsView eventsView;
     private List<Person> listClients;
     private PrincipalPanel principalPanel;
@@ -35,6 +36,26 @@ public class PanelClients extends DefaultPanel {
         this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
         bodyClients.inabiliteFields();
         bodyClients.setPanelClients(this);
+
+        bodyDeleteCients = new BodyDeleteCients(eventsView,this);
+        add(bodyDeleteCients, java.awt.BorderLayout.CENTER);
+        bodyDeleteCients.setVisible(false);
+        bodyClients.setVisible(true);
+        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+    }
+
+    public void showDeleteClient(){
+        this.setBodyPanel(bodyDeleteCients);
+        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+        bodyClients.setVisible(false);
+        bodyDeleteCients.setVisible(true);
+    }
+
+    public void showNormalClient(){
+        this.setBodyPanel(bodyClients);
+        this.add(this.getBodyPanel(), java.awt.BorderLayout.CENTER);
+        bodyDeleteCients.setVisible(false);
+        bodyClients.setVisible(true);
     }
 
     public void listClients(){
@@ -96,5 +117,13 @@ public class PanelClients extends DefaultPanel {
 
     public List<Person> getListClients() {
         return listClients;
+    }
+
+    public BodyDeleteCients getBodyDeleteCients() {
+        return bodyDeleteCients;
+    }
+
+    public void setBodyDeleteCients(BodyDeleteCients bodyDeleteCients) {
+        this.bodyDeleteCients = bodyDeleteCients;
     }
 }

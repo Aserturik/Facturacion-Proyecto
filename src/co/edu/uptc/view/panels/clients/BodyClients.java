@@ -385,6 +385,5 @@ public class BodyClients extends BodyPanel {
 
     public void selectClient() {
         isModeSelected = true;
-
     }
 }

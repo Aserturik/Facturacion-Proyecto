@@ -50,6 +50,11 @@ public interface Contract {
         boolean isEditProduct(int index, Product newProduct);
 
         Product getProduct(String text);
+        void DeleteAllClientsNoFactura();
+
+        String getClientsNoFactura();
+
+        String getClientsYesFactura();
     }
 
     interface Model{
@@ -79,5 +84,13 @@ public interface Contract {
         List<Buy> getBuys();
 
         Product getProduct(String text);
+
+        void DeleteAllClientsNoFactura();
+
+        void setClients(List<Person> clientsInBills);
+
+        String getClientsNoFactura();
+
+        String getClientsYesFactura();
     }
 }

@@ -97,7 +97,7 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
         principalPanel.openBill();
     }
 
-    private void saveAllLists() {
+    public void saveAllLists() {
         presenter.loadClients();
         presenter.loadProducts();
         presenter.loadBills();
@@ -238,5 +238,17 @@ public class MyFrame extends JFrame implements Contract.View, EventsView{
 
     public Product getProduct(String text) {
         return presenter.getProduct(text);
+    }
+
+    public void DeleteAllClientsNoFactura() {
+        presenter.DeleteAllClientsNoFactura();
+    }
+
+    public String getClientsNoFactura() {
+        return presenter.getClientsNoFactura();
+    }
+
+    public String getClientsYesFactura() {
+        return presenter.getClientsYesFactura();
     }
 }

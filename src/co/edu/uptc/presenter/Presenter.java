@@ -141,4 +141,19 @@ public class Presenter implements Contract.Presenter {
         return model.getProduct(text);
     }
 
+    @Override
+    public void DeleteAllClientsNoFactura() {
+        model.DeleteAllClientsNoFactura();
+    }
+
+    @Override
+    public String getClientsNoFactura() {
+        return model.getClientsNoFactura();
+    }
+
+    @Override
+    public String getClientsYesFactura() {
+        return model.getClientsYesFactura();
+    }
+
 }
